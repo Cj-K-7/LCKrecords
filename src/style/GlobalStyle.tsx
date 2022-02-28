@@ -28,6 +28,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: ${(props) => props.theme.backgroundColor};
+	color : ${(props) => props.theme.textColor};
 }
 ol, ul {
 	list-style: none;
@@ -53,6 +55,17 @@ a {
 		color: inherit;
 	}
 }
-`
+input { 
+	padding : 10px 12px;
+	font-size : 16px;
+	border: none;
+	border-radius: 8px;
+	transition: 1.2s;
+	&:focus{
+	outline : none;
+	box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.3) inset;
+	}
+}
+`;
 
-export default GlobalStyle
+export default GlobalStyle;

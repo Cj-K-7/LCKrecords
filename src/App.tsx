@@ -1,15 +1,12 @@
-import { ThemeProvider } from "styled-components";
+import AppRouter from "./Router";
 import GlobalStyle from "./style/GlobalStyle";
-import { theme } from "./style/theme";
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
         <GlobalStyle />
-      </ThemeProvider>
+        <AppRouter />
     </>
   );
 }
-
 export default App;
