@@ -1,7 +1,10 @@
-import { FBauth } from "../firebase";
+import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -25,6 +28,7 @@ const Box = styled.div`
   justify-content: center;
 `;
 const Title = styled.h1`
+  color: black;
   font-size: 32px;
   letter-spacing: 2px;
   font-weight: 600;
@@ -73,28 +77,83 @@ function Auth() {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm<IForm>();
 
   const onSubmit = (data: IForm) => {
-    console.log(data);
+    //Sign in/up with email/pw
     if (isNew) {
       // 비밀번호 조건 추가
+      // 이메일계정 이미 존재하는지 추가
       if (data.password === data.confirmPW) {
-        createUserWithEmailAndPassword(FBauth, data.email, data.password)
+        createUserWithEmailAndPassword(auth, data.email, data.password)
           .then((userCredentail) => {
-            console.log(userCredentail);
+            console.log(userCredentail.user);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log("signing UP Err :" + err.code);
+            if (err.code === "auth/email-already-in-use") {
+              alert("email address aleady in use");
+            }
+          });
       } else {
         alert("Please check P/W confirm correctly");
-        setValue("confirmPW", "");
       }
     } else {
-      signInWithEmailAndPassword(FBauth, data.email, data.password)
+      signInWithEmailAndPassword(auth, data.email, data.password)
         .then((res) => console.log(res))
-        .catch(() => {
-          alert("non-exist-account/ Create an account");
+        .catch((err) => {
+          console.log("signing IN Err :" + err.code);
+          switch (err.code) {
+            case "auth/user-not-found":
+              alert(
+                "Account doesn't exist, check your email-adress or create account"
+              );
+              break;
+            case "auth/wrong-password":
+              alert("Incorrect Email or Password");
+              break;
+            case "auth/too-many-requests":
+              alert("Too many request, try later");
+              break;
+          }
+        });
+    }
+  };
+  // social Login
+  const providers = {
+    google: new GoogleAuthProvider(),
+    github: new GithubAuthProvider(),
+  };
+
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const {
+      currentTarget: { name },
+    } = event;
+    /// 이메일 계정 존재할시 중복된 이메일 주소 링크 시키기 구현 필요
+    if (name === "Google") {
+      signInWithPopup(auth, providers.google)
+        .then((userCredentail) => {
+          const token =
+            GoogleAuthProvider.credentialFromResult(
+              userCredentail
+            )?.accessToken;
+          console.log(userCredentail.user);
+        })
+        .catch((err) => console.log("google login err :" + err.code));
+    } else if (name === "Github") {
+      signInWithPopup(auth, providers.github)
+        .then((userCredentail) => {
+          const token =
+            GithubAuthProvider.credentialFromResult(
+              userCredentail
+            )?.accessToken;
+          console.log(userCredentail.user);
+        })
+        .catch((err) => {
+          console.log("github login err :" + err.code);
+          if (err.code === "auth/account-exists-with-different-credential") {
+            alert("Your email Adress already signed Up \nauto-link-email will be preparing soon... ");
+          }
         });
     }
   };
@@ -129,8 +188,12 @@ function Auth() {
           <Submit value={isNew ? "Sign Up" : "Sign In"} />
         </Form>
         <Options>
-          <BTN>Continue with Google</BTN>
-          <BTN>Continue with Github</BTN>
+          <BTN onClick={onClick} name="Google">
+            Continue with Google
+          </BTN>
+          <BTN onClick={onClick} name="Github">
+            Continue with Github
+          </BTN>
           <BTN onClick={() => setIsNew((prev) => !prev)}>
             {isNew ? "Go to Sign In" : "Go to create Account"}
           </BTN>

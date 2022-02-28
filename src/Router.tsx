@@ -1,4 +1,4 @@
-import { FBauth } from "./firebase";
+import { auth } from "./firebase";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Auth from "./routes/Auth";
@@ -9,21 +9,21 @@ import { useEffect } from "react";
 import Loader from "./components/Loader";
 
 function AppRouter() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
-    onAuthStateChanged(FBauth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLogin(true);
       } else {
         setIsLogin(false);
       }
-      setIsLoading(false);
+      setIsLoaded(true);
     });
   }, []);
   return (
     <>
-      {isLoading ? (
+      {!isLoaded ? (
         <Loader />
       ) : (
         <BrowserRouter>

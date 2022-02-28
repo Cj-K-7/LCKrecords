@@ -27,9 +27,10 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	font-size: 1.4em;
 	line-height: 1;
-	background-color: ${(props) => props.theme.backgroundColor};
 	color : ${(props) => props.theme.textColor};
+	background-color: ${(props) => props.theme.backgroundColor};
 }
 ol, ul {
 	list-style: none;
@@ -55,7 +56,7 @@ a {
 		color: inherit;
 	}
 }
-input { 
+input, button{ 
 	padding : 10px 12px;
 	font-size : 16px;
 	border: none;
