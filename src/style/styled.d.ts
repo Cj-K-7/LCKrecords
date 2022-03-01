@@ -5,5 +5,7 @@ declare module "styled-components" {
         backgroundColor : string;
         textColor : string;
         textHover : string;
+        modalColor : string;
+        modalTextColor : string
     }
 }

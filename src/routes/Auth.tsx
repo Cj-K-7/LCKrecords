@@ -83,7 +83,6 @@ function Auth() {
     //Sign in/up with email/pw
     if (isNew) {
       // 비밀번호 조건 추가
-      // 이메일계정 이미 존재하는지 추가
       if (data.password === data.confirmPW) {
         createUserWithEmailAndPassword(auth, data.email, data.password)
           .then((userCredentail) => {

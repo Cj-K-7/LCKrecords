@@ -7,6 +7,7 @@ import Matches from "./routes/Matches";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import Loader from "./components/Loader";
+import Header from "./components/Header";
 
 function AppRouter() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,6 +24,7 @@ function AppRouter() {
   }, []);
   return (
     <>
+      <Header />
       {!isLoaded ? (
         <Loader />
       ) : (
