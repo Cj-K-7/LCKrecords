@@ -7,8 +7,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import { useState } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100vw;
@@ -84,6 +84,7 @@ function Auth() {
     if (isNew) {
       // 비밀번호 조건 추가
       if (data.password === data.confirmPW) {
+        //생성 완료
         createUserWithEmailAndPassword(auth, data.email, data.password)
           .then((userCredentail) => {
             console.log(userCredentail.user);
@@ -95,6 +96,7 @@ function Auth() {
             }
           });
       } else {
+        //비밀먼호 확인 틀린 경우
         alert("Please check P/W confirm correctly");
       }
     } else {
@@ -123,37 +125,30 @@ function Auth() {
     google: new GoogleAuthProvider(),
     github: new GithubAuthProvider(),
   };
-
+  const signWithSNS = (provider: GoogleAuthProvider | GithubAuthProvider) =>
+    signInWithPopup(auth, provider)
+      .then((userCredentail) => {
+        // const token =
+        // GoogleAuthProvider.credentialFromResult(userCredentail)?.accessToken;
+        console.log(userCredentail.user);
+      })
+      .catch((err) => {
+        console.log(`${provider} login err :` + err.code);
+            /// 이메일 계정 존재할시 중복된 이메일 주소 링크 시키기 구현 필요
+        if (err.code === "auth/account-exists-with-different-credential") {
+          alert(
+            "Your email Adress already signed Up \nauto-link-email will be preparing soon... "
+          );
+        }
+      });
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
       currentTarget: { name },
     } = event;
-    /// 이메일 계정 존재할시 중복된 이메일 주소 링크 시키기 구현 필요
     if (name === "Google") {
-      signInWithPopup(auth, providers.google)
-        .then((userCredentail) => {
-          const token =
-            GoogleAuthProvider.credentialFromResult(
-              userCredentail
-            )?.accessToken;
-          console.log(userCredentail.user);
-        })
-        .catch((err) => console.log("google login err :" + err.code));
+      signWithSNS(providers.google);
     } else if (name === "Github") {
-      signInWithPopup(auth, providers.github)
-        .then((userCredentail) => {
-          const token =
-            GithubAuthProvider.credentialFromResult(
-              userCredentail
-            )?.accessToken;
-          console.log(userCredentail.user);
-        })
-        .catch((err) => {
-          console.log("github login err :" + err.code);
-          if (err.code === "auth/account-exists-with-different-credential") {
-            alert("Your email Adress already signed Up \nauto-link-email will be preparing soon... ");
-          }
-        });
+      signWithSNS(providers.github);
     }
   };
 

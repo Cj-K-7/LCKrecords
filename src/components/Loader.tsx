@@ -13,22 +13,25 @@ const Position = styled.div`
 const Loading = styled.div`
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: 200px;
   div {
     position: absolute;
-    border: 4px solid #fff;
+    border: 5px solid #fff;
     opacity: 1;
     border-radius: 50%;
-    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    animation: lds-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
   }
   div:nth-child(2) {
-    animation-delay: -0.5s;
+    animation-delay: -0.66s;
+  }
+  div:nth-child(3) {
+    animation-delay: -1.33s;
   }
   @keyframes lds-ripple {
     0% {
-      top: 36px;
-      left: 36px;
+      top: 90px;
+      left: 90px;
       width: 0;
       height: 0;
       opacity: 1;
@@ -36,8 +39,8 @@ const Loading = styled.div`
     100% {
       top: 0px;
       left: 0px;
-      width: 72px;
-      height: 72px;
+      width: 180px;
+      height: 180px;
       opacity: 0;
     }
   }
@@ -47,6 +50,7 @@ function Loader() {
   return (
     <Position>
       <Loading>
+        <div />
         <div />
         <div />
       </Loading>
