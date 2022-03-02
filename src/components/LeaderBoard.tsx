@@ -1,21 +1,124 @@
-import {
-  collection,
-  doc,
-  DocumentData,
-  getDoc,
-  getDocs,
-  query,
-} from "firebase/firestore";
+import { collection, DocumentData, getDocs, query } from "firebase/firestore";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { database } from "../firebase";
-import { IdataProps } from "../routes/Admin";
+import Loader from "./Loader";
 
-const Board = styled.div``;
-const GridTable = styled.div`
-  width: 600px;
+const Board = styled.div`
+  h1 {
+    font-size: 90px;
+    margin-bottom: 13px;
+  }
+`;
+const Table = styled(motion.div)`
+  min-width: 600px;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  gap: 12px;
   height: auto;
-  background-color: white;
+  div:nth-child(1) {
+    background-image: linear-gradient(
+      45deg,
+      rgb(75, 69, 184),
+      5%,
+      transparent 30%
+    );
+  }
+  div:nth-child(2) {
+    background-image: linear-gradient(
+      45deg,
+      rgb(75, 69, 184),
+      5%,
+      transparent 30%
+    );
+  }
+  div:nth-child(3) {
+    background-image: linear-gradient(
+      45deg,
+      rgb(75, 69, 184),
+      5%,
+      transparent 30%
+    );
+  }
+  div:nth-child(4) {
+    background-image: linear-gradient(
+      45deg,
+      rgb(75, 69, 184),
+      5%,
+      transparent 30%
+    );
+  }
+  div:nth-child(5) {
+    background-image: linear-gradient(
+      45deg,
+      rgb(75, 69, 184),
+      5%,
+      transparent 30%
+    );
+  }
+  div:nth-child(6) {
+    background-image: linear-gradient(
+      45deg,
+      rgb(75, 69, 184),
+      5%,
+      transparent 30%
+    );
+  }
+`;
+const Label = styled.div`
+  width: 600px;
+  display: grid;
+  grid-template-columns: 280px repeat(4, 1fr);
+  padding-bottom: 5px;
+  margin-bottom: 12px;
+  border-bottom: 3px solid ${(props) => props.theme.textColor};
+  span {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  span:first-child {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    text-align: start;
+    svg {
+      margin-right: 5px;
+      width: 20px;
+      height: 20px;
+      path {
+        fill: rgb(75, 69, 184);
+      }
+    }
+  }
+`;
+const Team = styled(motion.div)`
+  width: 600px;
+  display: grid;
+  grid-template-columns: 70px 70px 140px repeat(4, 1fr);
+  align-items: center;
+  span {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+  }
+  span:first-child {
+    font-size: 32px;
+    font-weight: 900;
+  }
+  &::after {
+    content: "";
+    width: 600px;
+    height: 3px;
+    background: linear-gradient(to right, transparent, 20%, rgb(55, 50, 68));
+  }
+`;
+
+const Name = styled.h2`
+  font-size: 30px;
 `;
 
 declare module "firebase/firestore" {
@@ -28,59 +131,89 @@ declare module "firebase/firestore" {
   }
 }
 
-function LeaderBoard() {
-  const [data, setData] = useState<DocumentData[]>();
-  const [final, setfinalResult] = useState<IdataProps[]>();
-  const getData = async () => {
-    const q = query(collection(database, "DB", "LB", "teams"));
-    const querySnapshot = await getDocs(q);
-    const results = querySnapshot.docs.map((doc) => {
-      return doc.data();
-    });
-    setData(results);
+const tableVar = {
+  hidden: { },
+  visible: {
+    transition: {
+      duration: 0.6,
+      delayChildren: 0.8,
+      staggerChildren: 0.6
+    }
+    
+  },
+};
 
-    setfinalResult(
-      data?.sort((a, b) => {
-        if (a.match_win > b.match_win) {
-          return 1;
-        }
-        if (a.match_win < b.match_win) {
-          return -1;
-        }
-        if (a.match_win === b.match_win) {
-          if (a.round_win - a.round_lose > b.round_win - b.round_lose) {
-            return -1;
-          }
-          if (a.round_win - a.round_lose < b.round_win - b.round_lose) {
-            return 1;
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
+function LeaderBoard() {
+  const [teams, setTeams] = useState<DocumentData[]>();
+  const getData = async () => {
+    const que = query(collection(database, "DB", "LB", "teams"));
+    const documents = await getDocs(que);
+    setTeams(
+      documents.docs
+        .map((a) => a.data())
+        .sort((a, b) => {
+          if (+a.match_win < +b.match_win) return +1;
+          if (+a.match_win > +b.match_win) return -1;
+          if (+a.match_win === +b.match_win) {
+            if (+a.round_win < +b.round_win) return +1;
+            if (+a.round_win > +b.round_win) return -1;
           }
           return 0;
-        }
-        return 0;
-      })
+        })
     );
+    console.log(teams);
   };
 
-  console.log(data);
   useEffect(() => {
     getData();
   }, []);
 
   return (
     <Board>
-      LEADERBOARD
-      <GridTable>
-        {data?.map((t) => {
-          <div key={t.name}>
-            <h1>{t.name}aa</h1>
-            <div>{t.match_win}</div>
-            <div>{t.match_lose}</div>
-            <div>{t.round_win}</div>
-            <div>{t.round_lose}</div>
-            <div>{t.round_win - t.round_lose}</div>
-          </div>;
-        })}
-      </GridTable>
+      <h1>STANDINGS</h1>
+      <Label>
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M0 0H512V512H0V0z" />
+          </svg>
+          = Playoffs
+        </span>
+        <span>Change</span>
+        <span>W/L</span>
+        <span>+/-</span>
+        <span>STREAK</span>
+      </Label>
+      {teams ? 
+      <Table variants={tableVar} initial="hidden" animate="visible">
+        {teams?.map((a, index) => (
+          <Team key={index} variants={item} transition={{duration : 1}}>
+            <span>{index + 1}</span>
+            <img
+              style={{ width: 50, height: 50 }}
+              src={require(`../images/${a.name}_reverse.png`)}
+            ></img>
+            <Name>{a.name}</Name>
+            <span>-</span>
+            <span>
+              {a.match_win} - {a.match_lose}
+            </span>
+            <span>
+              {+a.round_win - +a.round_lose > 0
+                ? `+${+a.round_win - +a.round_lose}`
+                : `${+a.round_win - +a.round_lose}`}
+            </span>
+            <span>-</span>
+          </Team>
+        ))}
+      </Table> : <Loader/>}
     </Board>
   );
 }

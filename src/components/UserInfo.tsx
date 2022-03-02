@@ -12,16 +12,17 @@ const Modal = styled(motion.div)`
   right: 125px;
   padding: 15px 18px;
   border-radius: 15px;
-  background-color: ${(props) => props.theme.modalColor};
   color: ${(props) => props.theme.modalTextColor};
+  background-color: ${(props) => props.theme.modalColor};
   font-size: 14px;
   transform-origin: top right;
+  z-index: 1;
 `;
 
-const UserEmail = styled.span`
+const UserEmail = styled.div`
   margin-bottom: 16px;
 `;
-const SignOut = styled.span`
+const SignOut = styled.div`
   align-self: flex-end;
 `;
 

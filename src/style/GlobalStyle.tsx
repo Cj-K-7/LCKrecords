@@ -25,12 +25,17 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 body {
-	font-size: 1.4em;
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+	font-size: 1.2em;
+	font-weight: 900;
 	line-height: 1;
 	color : ${(props) => props.theme.textColor};
-	background-color: ${(props) => props.theme.backgroundColor};
+	background-image: linear-gradient(to top left, rgb(31, 26, 46),rgb(45, 40, 58) );
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */
 	-khtml-user-select: none; /* Konqueror HTML */
@@ -38,6 +43,10 @@ body {
 	-ms-user-select: none; /* Internet Explorer/Edge */
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 	font-family: 'Orbitron', sans-serif;
+	overflow-x: hidden;
+	&::-webkit-scrollbar{
+		display: none;
+	}
 }
 ol, ul {
 	list-style: none;
