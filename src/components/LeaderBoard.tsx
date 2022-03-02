@@ -19,50 +19,50 @@ const Table = styled(motion.div)`
   height: auto;
   div:nth-child(1) {
     background-image: linear-gradient(
-      45deg,
+      30deg,
       rgb(75, 69, 184),
       5%,
-      transparent 30%
+      transparent 25%
     );
   }
   div:nth-child(2) {
     background-image: linear-gradient(
-      45deg,
+      30deg,
       rgb(75, 69, 184),
       5%,
-      transparent 30%
+      transparent 25%
     );
   }
   div:nth-child(3) {
     background-image: linear-gradient(
-      45deg,
+      30deg,
       rgb(75, 69, 184),
       5%,
-      transparent 30%
+      transparent 25%
     );
   }
   div:nth-child(4) {
     background-image: linear-gradient(
-      45deg,
+      30deg,
       rgb(75, 69, 184),
       5%,
-      transparent 30%
+      transparent 25%
     );
   }
   div:nth-child(5) {
     background-image: linear-gradient(
-      45deg,
+      30deg,
       rgb(75, 69, 184),
       5%,
-      transparent 30%
+      transparent 25%
     );
   }
   div:nth-child(6) {
     background-image: linear-gradient(
-      45deg,
+      30deg,
       rgb(75, 69, 184),
       5%,
-      transparent 30%
+      transparent 25%
     );
   }
 `;
@@ -113,7 +113,7 @@ const Team = styled(motion.div)`
     content: "";
     width: 600px;
     height: 3px;
-    background: linear-gradient(to right, transparent, 20%, rgb(55, 50, 68));
+    background: linear-gradient(to right, transparent, rgb(60, 55, 78));
   }
 `;
 
@@ -132,14 +132,14 @@ declare module "firebase/firestore" {
 }
 
 const tableVar = {
-  hidden: { },
+  hidden: {},
   visible: {
     transition: {
       duration: 0.6,
       delayChildren: 0.8,
-      staggerChildren: 0.6
-    }
-    
+      staggerChildren: 0.6,
+
+    },
   },
 };
 
@@ -160,21 +160,23 @@ function LeaderBoard() {
       documents.docs
         .map((a) => a.data())
         .sort((a, b) => {
+          const Apoint = +a.round_win - +a.round_lose;
+          const Bpoint = +b.round_win - +b.round_lose;
           if (+a.match_win < +b.match_win) return +1;
           if (+a.match_win > +b.match_win) return -1;
           if (+a.match_win === +b.match_win) {
-            if (+a.round_win < +b.round_win) return +1;
-            if (+a.round_win > +b.round_win) return -1;
+            if (Apoint < Bpoint) return +1;
+            if (Apoint > Bpoint) return -1;
+            return 0;
           }
           return 0;
         })
     );
-    console.log(teams);
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  },[]);
 
   return (
     <Board>
@@ -191,29 +193,33 @@ function LeaderBoard() {
         <span>+/-</span>
         <span>STREAK</span>
       </Label>
-      {teams ? 
-      <Table variants={tableVar} initial="hidden" animate="visible">
-        {teams?.map((a, index) => (
-          <Team key={index} variants={item} transition={{duration : 1}}>
-            <span>{index + 1}</span>
-            <img
-              style={{ width: 50, height: 50 }}
-              src={require(`../images/${a.name}_reverse.png`)}
-            ></img>
-            <Name>{a.name}</Name>
-            <span>-</span>
-            <span>
-              {a.match_win} - {a.match_lose}
-            </span>
-            <span>
-              {+a.round_win - +a.round_lose > 0
-                ? `+${+a.round_win - +a.round_lose}`
-                : `${+a.round_win - +a.round_lose}`}
-            </span>
-            <span>-</span>
-          </Team>
-        ))}
-      </Table> : <Loader/>}
+      {teams ? (
+        <Table variants={tableVar} initial="hidden" animate="visible">
+          {teams?.map((a, index) => (
+            <Team key={index} variants={item} transition={{ duration: 1 }}>
+              <span>{index + 1}</span>
+              <img
+                style={{ width: 50, height: 50 }}
+                src={require(`../images/${a.name}_reverse.png`)}
+                alt={"Team's Icon"}
+              />
+              <Name>{a.name}</Name>
+              <span>-</span>
+              <span>
+                {a.match_win} - {a.match_lose}
+              </span>
+              <span>
+                {+a.round_win - +a.round_lose > 0
+                  ? `+${+a.round_win - +a.round_lose}`
+                  : `${+a.round_win - +a.round_lose}`}
+              </span>
+              <span>-</span>
+            </Team>
+          ))}
+        </Table>
+      ) : (
+        <Loader />
+      )}
     </Board>
   );
 }

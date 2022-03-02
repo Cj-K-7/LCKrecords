@@ -35,7 +35,17 @@ body {
 	font-weight: 900;
 	line-height: 1;
 	color : ${(props) => props.theme.textColor};
-	background-image: linear-gradient(to top left, rgb(31, 26, 46),rgb(45, 40, 58) );
+	background-image: 
+		linear-gradient(
+			to bottom right,
+			rgb(31, 26, 46),
+			rgb(31, 26, 46), 
+			rgb(38, 32, 52),
+			rgb(55, 50, 68),
+			rgb(73,68,105)
+		);
+	background-size: 400% 400%;
+	animation: gradient 8s ease infinite 3s;
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */
 	-khtml-user-select: none; /* Konqueror HTML */
@@ -82,6 +92,17 @@ input, button{
 	outline : none;
 	box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.3) inset;
 	}
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 `;
 
