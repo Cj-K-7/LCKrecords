@@ -121,15 +121,15 @@ const Name = styled.h2`
   font-size: 30px;
 `;
 
-declare module "firebase/firestore" {
-  export interface DocumentData {
-    name: string;
-    match_win: number;
-    match_lose: number;
-    round_win: number;
-    round_lose: number;
-  }
-}
+// declare module "firebase/firestore" {
+//   export interface DocumentData {
+//     name: string;
+//     match_win: number;
+//     match_lose: number;
+//     round_win: number;
+//     round_lose: number;
+//   }
+// }
 
 const tableVar = {
   hidden: {},

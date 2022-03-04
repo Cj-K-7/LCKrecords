@@ -24,7 +24,12 @@ function AppRouter() {
   }, []);
   return (
     <>
-      {!isLoaded ? (
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Admin />} />
+      </Routes>
+      </BrowserRouter>
+      {/* {!isLoaded ? (
         <Loader />
       ) : (
         <BrowserRouter>
@@ -41,7 +46,7 @@ function AppRouter() {
             )}
           </Routes>
         </BrowserRouter>
-      )}
+      )} */}
     </>
   );
 }

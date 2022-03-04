@@ -13,6 +13,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/styled-components": "^5.1.23",
     "firebase": "^9.6.7",
+    "firestore-export-import": "^0.17.0",
     "framer-motion": "^6.2.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -29,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "export": "firestore-export --accountCredentials lck-records-firebase-adminsdk-4eyd7-8c58c3d598.json --backpufile LCK2022Spring.json -p"
   },
   "eslintConfig": {
     "extends": [

@@ -82,17 +82,34 @@ a {
 		color: inherit;
 	}
 }
-input, button{ 
+input, button, select{ 
+	font-family: 'Orbitron', sans-serif;
 	padding : 10px 12px;
 	font-size : 16px;
 	border: none;
 	border-radius: 8px;
-	transition: 1.2s;
+	transition: 0.8s;
 	&:focus{
 	outline : none;
 	box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.3) inset;
 	}
+	&:hover{
+	outline : none;
+	box-shadow: 0px 0px 10px 3px rgba(220, 220, 255, 0.3) inset;
+	}
 }
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}
+
 @keyframes gradient {
     0% {
         background-position: 0% 50%;

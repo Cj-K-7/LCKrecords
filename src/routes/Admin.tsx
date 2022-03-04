@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import Operation from "../components/Operation";
 import { auth, database } from "../firebase";
 
 export interface IdataProps {
@@ -32,25 +33,7 @@ function Admin() {
   };
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register("name", { required: true })}>
-          <option value="T1">T1</option>
-          <option value="DWG">DWG</option>
-          <option value="GEN">GEN</option>
-          <option value="HLE">HLE</option>
-          <option value="BRO">BRO</option>
-          <option value="NS">NS</option>
-          <option value="KDF">KDF</option>
-          <option value="LSB">LSB</option>
-          <option value="KT">KT</option>
-          <option value="DRX">DRX</option>
-        </select>
-        <input {...register("match_win", { required: true })} type="number" />
-        <input {...register("match_lose", { required: true })} type="number" />
-        <input {...register("round_win", { required: true })} type="number" />
-        <input {...register("round_lose", { required: true })} type="number" />
-        <input type="submit" value="SUBMIT" />
-      </Form>
+      <Operation />
     </Container>
   );
 }
