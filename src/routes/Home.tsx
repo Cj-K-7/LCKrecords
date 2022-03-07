@@ -85,7 +85,7 @@ function Home() {
             title="LCKLIVE"
             width="1080"
             height="607.5"
-            src="https://player.twitch.tv/?channel=lck_korea&autoplay=true"
+            src="https://player.twitch.tv/?channel=lck_korea&parent=cj-k-7.github.io&autoplay=true"
             allowFullScreen
           ></iframe>
         </LCK_LIVE>
