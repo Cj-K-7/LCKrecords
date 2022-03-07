@@ -98,7 +98,7 @@ function Matches() {
   return (
     <Container>
       <Title> LCK SPRING SPLIT UPCOMING SCHDULE </Title>
-      {schdules? \
+      {schdules? 
       <Grid>
         {schdules
           ?.filter((a) => +new Date(a.date) >= +new Date() - 10800000)
