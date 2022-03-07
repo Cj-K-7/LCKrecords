@@ -1,10 +1,12 @@
 import { collection, DocumentData, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Loader from "../components/Loader";
 import { database } from "../firebase";
 
 const Container = styled.div`
   width: 100vw;
+  height: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -96,6 +98,7 @@ function Matches() {
   return (
     <Container>
       <Title> LCK SPRING SPLIT UPCOMING SCHDULE </Title>
+      {schdules? \
       <Grid>
         {schdules
           ?.filter((a) => +new Date(a.date) >= +new Date() - 10800000)
@@ -115,7 +118,7 @@ function Matches() {
                     <img
                       src={require(`../images/${d.teamA}_reverse.png`)}
                       alt={"Team's Icon"}
-                    />
+                      />
                     <label>{d.teamA}</label>
                   </Team>
                   <Versus>VS</Versus>
@@ -123,7 +126,7 @@ function Matches() {
                     <img
                       src={require(`../images/${d.teamB}_reverse.png`)}
                       alt={"Team's Icon"}
-                    />
+                      />
                     <label>{d.teamB}</label>
                   </Team>
                 </Teams>
@@ -131,6 +134,7 @@ function Matches() {
             );
           })}
       </Grid>
+    : <Loader/>}
     </Container>
   );
 }
