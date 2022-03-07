@@ -9,21 +9,18 @@ import {
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { database } from "../firebase";
-import { schedules } from "../LCK2022SPRING";
 import Loader from "./Loader";
+import MatchForm from "./MatchForm";
+import { schedules } from "../LCK2022SPRING";
 
-const Container = styled.div``;
-
-const today = new Date();
-const todayMatch = `${today.getMonth()}.${today.getMonth()}`;
-
-interface IMatchProps {
-  match_win: string;
-  match_lose: string;
-  win_score: number;
-  lose_score: number;
-}
-
+const Container = styled.div`
+  width: fit-content;
+  height: fit-content;
+  margin-left: 30px;
+  h1{
+    font-size: 32px ;
+  }
+`;
 
 function Operation() {
   const [matches, setmatches] = useState<DocumentData[]>();
@@ -33,25 +30,39 @@ function Operation() {
     setmatches(documents.docs.map((a) => a.data()));
   };
 
-  const sb = async () => {
-    await schedules.map((s) =>
-      setDoc(doc(database, "DB", "schedules", "spring", s.date), s)
-    );
-  };
+  // const sb = async () => {
+  //   await schedules.map((s) =>
+  //     setDoc(doc(database, "DB", "schedules", "spring", s.date), s)
+  //   );
+  // };
 
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <Container>
-      <button onClick={()=>sb()}></button>
+      <h1>OPERATION PANEL</h1>
+      {/* <button onClick={() => sb()}></button> */}
       {matches ? (
         <>
-          {matches.map((match) => (
-
-          ))}
+          {matches
+            .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
+            .filter((a)=>!a.isDone)
+            .map((match) => (
+              <MatchForm
+                key={match.date}
+                round={match.round}
+                date={match.date}
+                teamA={match.teamA}
+                teamB={match.teamB}
+                isDone={match.isDone}
+              />
+            ))}
         </>
-      ) : <Loader/>}
+      ) : (
+        <Loader />
+      )}
     </Container>
   );
 }

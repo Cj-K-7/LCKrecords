@@ -13,6 +13,10 @@ const Main = styled.div`
   justify-content: space-evenly;
   align-items: flex-start;
   margin-bottom: 100px;
+  @media (max-width:1200px) {
+    flex-direction: column ;
+    align-items: center ;
+  }
 `;
 const Sub = styled.div`
   position: relative;

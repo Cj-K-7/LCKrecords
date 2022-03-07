@@ -6,11 +6,9 @@ import Admin from "./routes/Admin";
 import Matches from "./routes/Matches";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import Loader from "./components/Loader";
 import Header from "./components/Header";
 
 function AppRouter() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -19,21 +17,11 @@ function AppRouter() {
       } else {
         setIsLogin(false);
       }
-      setIsLoaded(true);
     });
   }, []);
   return (
-    <>
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Admin />} />
-      </Routes>
-      </BrowserRouter>
-      {/* {!isLoaded ? (
-        <Loader />
-      ) : (
-        <BrowserRouter>
-          <Header />
+    <BrowserRouter>
+        <Header />
           <Routes>
             {isLogin ? (
               <>
@@ -45,9 +33,7 @@ function AppRouter() {
               <Route path="/" element={<Auth />} />
             )}
           </Routes>
-        </BrowserRouter>
-      )} */}
-    </>
+    </BrowserRouter>
   );
 }
 

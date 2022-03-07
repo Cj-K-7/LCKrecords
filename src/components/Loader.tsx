@@ -1,15 +1,16 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Position = styled.div`
-    width : 100vw;
-    height: 100vh;
-    position : fixed;
-    left: 0;
-    top : 0;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-`
+  margin: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  h2{
+    font-size: 30px;
+  }
+`;
 const Loading = styled.div`
   display: inline-block;
   position: relative;
@@ -47,13 +48,21 @@ const Loading = styled.div`
 `;
 
 function Loader() {
+  const [isExeeded, setIsExeeded] = useState(false);
+  setInterval(() => setIsExeeded(true), 7000);
   return (
     <Position>
-      <Loading>
-        <div />
-        <div />
-        <div />
-      </Loading>
+      {isExeeded ? (
+        <h2>
+        Maybe Server Requset <br/><br/> Or Network Problems
+        </h2>
+      ) : (
+        <Loading>
+          <div />
+          <div />
+          <div />
+        </Loading>
+      )}
     </Position>
   );
 }

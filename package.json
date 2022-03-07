@@ -1,5 +1,6 @@
 {
   "name": "lck",
+  "homepage": "https://cj-k-7.github.io/LCKrecords",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +16,7 @@
     "firebase": "^9.6.7",
     "firestore-export-import": "^0.17.0",
     "framer-motion": "^6.2.8",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.27.1",
@@ -31,7 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "export": "firestore-export --accountCredentials lck-records-firebase-adminsdk-4eyd7-8c58c3d598.json --backpufile LCK2022Spring.json -p"
+    "export": "firestore-export --accountCredentials lck-records-firebase-adminsdk-4eyd7-8c58c3d598.json --backpufile LCK2022Spring.json -p",
+    "predeploy" : "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

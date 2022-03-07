@@ -6,13 +6,14 @@ import { database } from "../firebase";
 import Loader from "./Loader";
 
 const Board = styled.div`
+  min-width: 600px;
+  padding: 0px 30px;
   h1 {
     font-size: 90px;
     margin-bottom: 13px;
   }
 `;
 const Table = styled(motion.div)`
-  min-width: 600px;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   gap: 12px;

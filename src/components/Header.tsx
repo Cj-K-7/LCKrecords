@@ -21,6 +21,7 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   a {
+    cursor: pointer;
     padding: 0px 20px;
   }
 `;
