@@ -20,7 +20,7 @@ function AppRouter() {
     });
   }, []);
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
           <Routes>
             {isLogin ? (
