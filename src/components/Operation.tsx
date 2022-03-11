@@ -38,11 +38,12 @@ function Operation() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   return (
     <Container>
       <h1>OPERATION PANEL</h1>
+      <br/>
       {/* <button onClick={() => sb()}></button> */}
       {matches ? (
         <>

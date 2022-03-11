@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { database } from "../firebase";
+import { teams } from "./LButill";
 
 const Match = styled.form`
   width: 600px;
@@ -61,19 +62,6 @@ interface IFormProps {
   scoreA: number;
   scoreB: number;
 }
-
-const teams = [
-  "T1",
-  "DK",
-  "GEN",
-  "HLE",
-  "BRO",
-  "NS",
-  "KDF",
-  "LSB",
-  "KT",
-  "DRX",
-];
 
 function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
   const [A, setA] = useState(teamA);

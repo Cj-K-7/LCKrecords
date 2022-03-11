@@ -1,8 +1,10 @@
-import { collection, DocumentData, getDocs, query } from "firebase/firestore";
+import { collection, DocumentData, getDocs, query, updateDoc } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { NumberLiteralType } from "typescript";
 import { database } from "../firebase";
+import { autoStandings, teams } from "./LButill";
 import Loader from "./Loader";
 
 const Board = styled.div`
@@ -139,7 +141,6 @@ const tableVar = {
       duration: 0.6,
       delayChildren: 0.8,
       staggerChildren: 0.6,
-
     },
   },
 };
@@ -153,31 +154,33 @@ const item = {
 };
 
 function LeaderBoard() {
-  const [teams, setTeams] = useState<DocumentData[]>();
+  const [standing, setStanding] = useState<DocumentData[]>();
   const getData = async () => {
-    const que = query(collection(database, "DB", "LB", "teams"));
+    const que = query(collection(database, "DB", "schedules", "spring"));
     const documents = await getDocs(que);
-    setTeams(
-      documents.docs
-        .map((a) => a.data())
-        .sort((a, b) => {
-          const Apoint = +a.round_win - +a.round_lose;
-          const Bpoint = +b.round_win - +b.round_lose;
-          if (+a.match_win < +b.match_win) return +1;
-          if (+a.match_win > +b.match_win) return -1;
-          if (+a.match_win === +b.match_win) {
-            if (Apoint < Bpoint) return +1;
-            if (Apoint > Bpoint) return -1;
-            return 0;
-          }
+    const resultArr = documents.docs
+      .map((date) => date.data())
+      .filter((a) => a.isDone);
+    const sortedResults = teams
+      .map((a) => autoStandings(resultArr, a))
+      .sort((a, b) => {
+        const Apoint = a.scoreWin - a.scoreLose;
+        const Bpoint = b.scoreWin - b.scoreLose;
+        if (a.win < b.win) return 1;
+        if (a.win > b.win) return -1;
+        if (a.win === b.win) {
+          if (Apoint < Bpoint) return 1;
+          if (Apoint > Bpoint) return -1;
           return 0;
-        })
-    );
+        }
+        return 0;
+      });
+    setStanding(sortedResults);
   };
 
   useEffect(() => {
     getData();
-  },[]);
+  }, []);
 
   return (
     <Board>
@@ -194,25 +197,25 @@ function LeaderBoard() {
         <span>+/-</span>
         <span>STREAK</span>
       </Label>
-      {teams ? (
+      {standing ? (
         <Table variants={tableVar} initial="hidden" animate="visible">
-          {teams?.map((a, index) => (
+          {standing?.map((a, index) => (
             <Team key={index} variants={item} transition={{ duration: 1 }}>
               <span>{index + 1}</span>
               <img
                 style={{ width: 50, height: 50 }}
-                src={require(`../images/${a.name}_reverse.png`)}
+                src={require(`../images/${a.team}_reverse.png`)}
                 alt={"Team's Icon"}
               />
-              <Name>{a.name}</Name>
+              <Name>{a.team}</Name>
               <span>-</span>
               <span>
-                {a.match_win} - {a.match_lose}
+                {a.win} - {a.lose}
               </span>
               <span>
-                {+a.round_win - +a.round_lose > 0
-                  ? `+${+a.round_win - +a.round_lose}`
-                  : `${+a.round_win - +a.round_lose}`}
+                {a.scoreWin - a.scoreLose > 0
+                  ? `+${a.scoreWin - a.scoreLose}`
+                  : `${a.scoreWin - a.scoreLose}`}
               </span>
               <span>-</span>
             </Team>
