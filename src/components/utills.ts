@@ -33,3 +33,12 @@ export const autoStandings = (arr : DocumentData[], team : string) => {
   },{ team,  win: 0 , lose: 0, scoreWin : 0, scoreLose : 0})
 }
 
+export interface IMatchProps {
+  date : string;
+  round : number;
+  isDone : boolean
+  teamA : string;
+  scoreA : string;
+  teamB : string;
+  scoreB : string;
+}

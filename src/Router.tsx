@@ -6,7 +6,7 @@ import Admin from "./routes/Admin";
 import Matches from "./routes/Matches";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import Header from "./components/Header";
+import Header from "./components/Layouts/Header";
 
 function AppRouter() {
   const [isLogin, setIsLogin] = useState(false);

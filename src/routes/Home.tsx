@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LeaderBoard from "../components/LeaderBoard";
+import LeaderBoard from "../components/Core/LeaderBoard";
 import { Faceboock, Instagram, Tweet, Twitch } from "../components/SVGs";
 
 const Container = styled.div`

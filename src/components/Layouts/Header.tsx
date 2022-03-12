@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 import UserInfo from "./UserInfo";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
-import { LCK } from "./SVGs";
+import { LCK } from "../SVGs";
 
 const HeaderBox = styled.div`
   width: 100vw;

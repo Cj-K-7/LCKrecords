@@ -1,8 +1,9 @@
-import { collection, DocumentData, getDocs, query } from "firebase/firestore";
+import { DocumentData, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Loader from "../components/Loader";
-import { database } from "../firebase";
+import Loader from "../components/Layouts/Loader";
+import { IMatchProps } from "../components/utills";
+import { que } from "../firebase";
 
 const Container = styled.div`
   width: 100vw;
@@ -22,9 +23,9 @@ const Grid = styled.div`
   grid-template-columns: repeat(5, 1fr);
 `;
 const Title = styled.h1`
-    font-size: 30px;
-    padding: 30px;
-    margin : 20px 0px; 
+  font-size: 30px;
+  padding: 30px;
+  margin: 20px 0px;
 `;
 
 const Schedule = styled.div`
@@ -80,16 +81,18 @@ const Versus = styled.div`
 function Matches() {
   const [schdules, setSchedules] = useState<DocumentData[]>();
   const getSchedule = async () => {
-    const que = query(collection(database, "DB", "schedules", "spring"));
-    const documents = await getDocs(que);
-    setSchedules(
-      documents.docs
-        .map((date) => date.data())
-        .sort((a, b) => {
-          if (new Date(a.date) > new Date(b.date)) return 1;
-          return -1;
-        })
-    );
+    const document = await getDoc(que);
+    if (document.exists()) {
+      const matches : IMatchProps[] = document.data().sample 
+      setSchedules(
+        matches
+          .sort((a, b) => {
+            if (new Date(a.date) > new Date(b.date)) return 1;
+            return -1;
+          })
+          .filter((a) => +new Date(a.date) >= +new Date() - 10800000)
+      );
+    }
   };
 
   useEffect(() => {
@@ -98,43 +101,43 @@ function Matches() {
   return (
     <Container>
       <Title> LCK SPRING SPLIT UPCOMING SCHDULE </Title>
-      {schdules? 
-      <Grid>
-        {schdules
-          ?.filter((a) => +new Date(a.date) >= +new Date() - 10800000)
-          .map((d) => {
-            const d_day = new Date(d.date);
-            const month = d_day.getMonth();
-            const date = d_day.getDate();
-            return (
-              <Schedule key={d.date}>
-                <Day>
-                  <span>
-                    {month + 1}.{date}
-                  </span>
-                </Day>
-                <Teams>
-                  <Team>
-                    <img
-                      src={require(`../images/${d.teamA}_reverse.png`)}
-                      alt={"Team's Icon"}
+      {schdules ? (
+        <Grid>
+          {schdules.map((d) => {
+              const d_day = new Date(d.date);
+              const month = d_day.getMonth();
+              const date = d_day.getDate();
+              return (
+                <Schedule key={d.date}>
+                  <Day>
+                    <span>
+                      {month + 1}.{date}
+                    </span>
+                  </Day>
+                  <Teams>
+                    <Team>
+                      <img
+                        src={require(`../images/${d.teamA}_reverse.png`)}
+                        alt={"Team's Icon"}
                       />
-                    <label>{d.teamA}</label>
-                  </Team>
-                  <Versus>VS</Versus>
-                  <Team>
-                    <img
-                      src={require(`../images/${d.teamB}_reverse.png`)}
-                      alt={"Team's Icon"}
+                      <label>{d.teamA}</label>
+                    </Team>
+                    <Versus>VS</Versus>
+                    <Team>
+                      <img
+                        src={require(`../images/${d.teamB}_reverse.png`)}
+                        alt={"Team's Icon"}
                       />
-                    <label>{d.teamB}</label>
-                  </Team>
-                </Teams>
-              </Schedule>
-            );
-          })}
-      </Grid>
-    : <Loader/>}
+                      <label>{d.teamB}</label>
+                    </Team>
+                  </Teams>
+                </Schedule>
+              );
+            })}
+        </Grid>
+      ) : (
+        <Loader />
+      )}
     </Container>
   );
 }

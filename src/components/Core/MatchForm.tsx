@@ -1,9 +1,9 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { database } from "../firebase";
-import { teams } from "./LButill";
+import { que } from "../../firebase";
+import { teams } from "../utills";
 
 const Match = styled.form`
   width: 600px;
@@ -78,10 +78,23 @@ function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
       alert("check score");
       return;
     }
-    await updateDoc(doc(database, "DB", "schedules", "spring", date), {
+    await updateDoc(que, { sample : arrayUnion({
+      date,
+      round,  
       isDone: true,
+      teamA,
       scoreA: data.scoreA,
+      teamB,
       scoreB: data.scoreB,
+     })
+    });
+    await updateDoc(que, { sample : arrayRemove({
+      date,
+      round,  
+      isDone,
+      teamA,
+      teamB,
+     })
     });
   };
 
@@ -95,7 +108,7 @@ function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
           <Match onSubmit={handleSubmit(onSubmit)}>
             <Grid>
               <Team>
-                <img src={require(`../images/${A}.png`)} alt={"Team's Icon"} />
+                <img src={require(`../../images/${A}.png`)} alt={"Team's Icon"} />
                 <TeamName
                   id="teamA"
                   value={A}
@@ -141,7 +154,7 @@ function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
                     </option>
                   ))}
                 </TeamName>
-                <img src={require(`../images/${B}.png`)} alt={"Team's Icon"} />
+                <img src={require(`../../images/${B}.png`)} alt={"Team's Icon"} />
               </Team>
               <Buttons>
                 <input type="submit" value="✅" />

@@ -1,11 +1,10 @@
-import { collection, DocumentData, getDocs, query, updateDoc } from "firebase/firestore";
+import { DocumentData, getDoc, getDocsFromCache } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { NumberLiteralType } from "typescript";
-import { database } from "../firebase";
-import { autoStandings, teams } from "./LButill";
-import Loader from "./Loader";
+import { que } from "../../firebase";
+import { autoStandings, IMatchProps, teams } from "../utills";
+import Loader from "../Layouts/Loader";
 
 const Board = styled.div`
   min-width: 600px;
@@ -156,13 +155,14 @@ const item = {
 function LeaderBoard() {
   const [standing, setStanding] = useState<DocumentData[]>();
   const getData = async () => {
-    const que = query(collection(database, "DB", "schedules", "spring"));
-    const documents = await getDocs(que);
-    const resultArr = documents.docs
-      .map((date) => date.data())
-      .filter((a) => a.isDone);
-    const sortedResults = teams
-      .map((a) => autoStandings(resultArr, a))
+    const document = await getDoc(que);
+    //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
+    if(document.exists()){
+      const matches : IMatchProps[] = document.data().sample;
+      const convertingArr = 
+      matches.filter((a) => a.isDone);
+      const sortedResults = teams
+      .map((a) => autoStandings(convertingArr, a))
       .sort((a, b) => {
         const Apoint = a.scoreWin - a.scoreLose;
         const Bpoint = b.scoreWin - b.scoreLose;
@@ -175,7 +175,8 @@ function LeaderBoard() {
         }
         return 0;
       });
-    setStanding(sortedResults);
+      setStanding(sortedResults);
+    }
   };
 
   useEffect(() => {
@@ -204,7 +205,7 @@ function LeaderBoard() {
               <span>{index + 1}</span>
               <img
                 style={{ width: 50, height: 50 }}
-                src={require(`../images/${a.team}_reverse.png`)}
+                src={require(`../../images/${a.team}_reverse.png`)}
                 alt={"Team's Icon"}
               />
               <Name>{a.team}</Name>

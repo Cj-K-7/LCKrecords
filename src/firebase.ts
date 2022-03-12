@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getAuth} from "firebase/auth"
-import {getFirestore} from 'firebase/firestore'
+import {doc, getFirestore} from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -18,3 +18,4 @@ export const database = getFirestore(app);
 
 export const auth = getAuth();
 
+export const que = doc(database, "DB", "SpringSplit");
