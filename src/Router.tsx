@@ -30,7 +30,7 @@ function AppRouter() {
                 <Route path="/" element={<Home />} />
               </>
             ) : (
-              <Route path="/" element={<Auth />} />
+              <Route path="/*" element={<Auth />} />
             )}
           </Routes>
     </BrowserRouter>
