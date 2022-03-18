@@ -49,8 +49,8 @@ function Upcoming({upcoming}:IUpcomingProps) {
       <Title variants={child}> UPCOMING SCHDULE </Title>
       {upcoming ? (
         <Grid>
-          {upcoming.map((d) => (
-            <motion.div variants={child}>
+          {upcoming.map((d,i) => (
+            <motion.div key={i}variants={child}>
             <Match {...d} />
             </motion.div>
           ))}

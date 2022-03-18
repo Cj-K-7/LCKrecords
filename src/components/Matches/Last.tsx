@@ -47,8 +47,8 @@ function Last({last}:ILastProps) {
       <Title> Last Matches </Title>
       {last ? (
         <Grid>
-          {last.map((d) => (
-            <Match {...d} />
+          {last.map((d,i) => (
+            <Match {...d} key={i} />
           ))}
         </Grid>
       ) : (
