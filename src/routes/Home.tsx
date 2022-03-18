@@ -1,6 +1,10 @@
+import { DocumentData, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import LeaderBoard from "../components/Core/LeaderBoard";
 import { Faceboock, Instagram, Tweet, Twitch } from "../components/SVGs";
+import { autoStandings, IMatchProps, teams } from "../components/utills";
+import { que } from "../firebase";
 
 const Container = styled.div`
   width: 100%;
@@ -77,6 +81,36 @@ const SNS = styled.div`
 `;
 
 function Home() {
+  const [standing, setStanding] = useState<DocumentData[]>();
+  const getData = async () => {
+    const document = await getDoc(que);
+    //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
+    if(document.exists()){
+      const matches : IMatchProps[] = document.data().sample;
+      const convertingArr = 
+      matches.filter((a) => a.isDone);
+      const sortedResults = teams
+      .map((a) => autoStandings(convertingArr, a))
+      .sort((a, b) => {
+        const Apoint = a.scoreWin - a.scoreLose;
+        const Bpoint = b.scoreWin - b.scoreLose;
+        if (a.win < b.win) return 1;
+        if (a.win > b.win) return -1;
+        if (a.win === b.win) {
+          if (Apoint < Bpoint) return 1;
+          if (Apoint > Bpoint) return -1;
+          return 0;
+        }
+        return 0;
+      });
+      setStanding(sortedResults);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Container>
       <Main>
@@ -90,7 +124,7 @@ function Home() {
             allowFullScreen
           ></iframe>
         </LCK_LIVE>
-        <LeaderBoard />
+        {/* <LeaderBoard standings={standing} /> */}
       </Main>
       <Sub>
         <LCK_TV>

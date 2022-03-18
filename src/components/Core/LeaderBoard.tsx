@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { que } from "../../firebase";
 import { autoStandings, IMatchProps, teams } from "../utills";
 import Loader from "../Layouts/Loader";
+import { createSlice } from "@reduxjs/toolkit";
 
 const Board = styled.div`
   min-width: 600px;
@@ -152,37 +153,7 @@ const item = {
   },
 };
 
-function LeaderBoard() {
-  const [standing, setStanding] = useState<DocumentData[]>();
-  const getData = async () => {
-    const document = await getDoc(que);
-    //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
-    if(document.exists()){
-      const matches : IMatchProps[] = document.data().sample;
-      const convertingArr = 
-      matches.filter((a) => a.isDone);
-      const sortedResults = teams
-      .map((a) => autoStandings(convertingArr, a))
-      .sort((a, b) => {
-        const Apoint = a.scoreWin - a.scoreLose;
-        const Bpoint = b.scoreWin - b.scoreLose;
-        if (a.win < b.win) return 1;
-        if (a.win > b.win) return -1;
-        if (a.win === b.win) {
-          if (Apoint < Bpoint) return 1;
-          if (Apoint > Bpoint) return -1;
-          return 0;
-        }
-        return 0;
-      });
-      setStanding(sortedResults);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
+function LeaderBoard( standing : DocumentData[] ) {
   return (
     <Board>
       <h1>STANDINGS</h1>

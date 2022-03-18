@@ -5,8 +5,8 @@ import { database } from "../../firebase";
 import Loader from "../Layouts/Loader";
 import MatchForm from "./MatchForm";
 import { IMatchProps } from "../utills";
-import { schedules } from "../../LCK2022SPRING";
-import { sample } from "../../sample";
+import { schedules } from "../../samples/LCK2022SPRING";
+import { sample } from "../../samples/sample";
 
 const Container = styled.div`
   width: fit-content;
