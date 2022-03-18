@@ -19,8 +19,7 @@ collection 자체를 불러오는 행위가 너무 많은 request 였음을 확�
 
 ## CSS Grid
 
-매 경기 정보에 대해서 grid layout 을 통해 표현하는데 창 크기 조절할때마다
-자동으로 각 Grid 내부 element들이 열과 크기가 나뉘도록 조절할때 auto-fit / minmax() css방식으로 변경.
+responsive sizing : 매 경기 정보에 대해서 grid layout 을 통해 표현하는데 창 크기 조절할때마다 자동으로 각 Grid 내부 element들이 열과 크기가 나뉘도록 조절할때 auto-fit / minmax() css방식으로 변경.
 
 ## Styled-components
 
