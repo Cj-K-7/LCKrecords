@@ -23,6 +23,7 @@ const Schedule = styled.div<{ month: number; date: number }>`
 `;
 
 const Day = styled.div`
+font-size : 28px;
   text-align: center;
   margin-bottom: 12px;
 `;
@@ -42,6 +43,13 @@ const Team = styled.div`
     width: 65px;
     height: 65px;
   }
+`;
+const Score = styled.div`
+  width: 100px;
+  height: 35px;
+  font-size: 35px;
+  text-align: center;
+  margin: 16px;
 `;
 const Versus = styled.div`
   margin: 0px 24px;
@@ -67,7 +75,13 @@ function Match(data: DocumentData) {
           />
           <label>{data.teamA}</label>
         </Team>
-        <Versus>VS</Versus>
+        {data.scoreA && data.scoreB ? (
+          <>
+            <Score>{data.scoreA} : {data.scoreB}</Score>
+          </>
+        ) : (
+          <Versus>VS</Versus>
+        )}
         <Team>
           <img
             src={require(`../../images/${data.teamB}_reverse.png`)}

@@ -1,6 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { DocumentData } from "firebase/firestore";
 
-
+const springDataSlice = createSlice(
+    {name: 'spring',
+    initialState: <DocumentData>[],
+    reducers: {
+        setData(state, action){
+            state.push(action.payload)
+        }
+    }
+}
+)
 
 const store = configureStore({
     reducer : {

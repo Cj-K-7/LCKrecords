@@ -153,7 +153,11 @@ const item = {
   },
 };
 
-function LeaderBoard( standing : DocumentData[] ) {
+interface ILBProps{
+  standing :  DocumentData[]|undefined;
+}
+
+function LeaderBoard( {standing} : ILBProps) {
   return (
     <Board>
       <h1>STANDINGS</h1>

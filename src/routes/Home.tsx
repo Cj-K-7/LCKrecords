@@ -106,7 +106,7 @@ function Home() {
       setStanding(sortedResults);
     }
   };
-
+  
   useEffect(() => {
     getData();
   }, []);
@@ -124,7 +124,7 @@ function Home() {
             allowFullScreen
           ></iframe>
         </LCK_LIVE>
-        {/* <LeaderBoard standings={standing} /> */}
+        <LeaderBoard standing={standing} />
       </Main>
       <Sub>
         <LCK_TV>

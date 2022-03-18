@@ -57,6 +57,9 @@ body {
 	&::-webkit-scrollbar{
 		display: none;
 	}
+	& div::-webkit-scrollbar{
+		display: none;
+	}
 }
 ol, ul {
 	list-style: none;

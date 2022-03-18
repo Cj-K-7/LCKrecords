@@ -6,60 +6,56 @@ import Loader from "../Layouts/Loader";
 
 
 const Box = styled(motion.div)`
+  transform-origin: top;
 `;
 const Grid = styled.div`
   width: 100vw;
+  max-height: 220px;
+  overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-template-rows: auto;
   align-items: center;
 `;
-const Title = styled(motion.h1)`
+const Title = styled.h1`
   font-size: 30px;
   padding: 30px;
   margin: 20px 25px;
 `;
 
-const parent = {
-  hidden: { y : -100, opacity : 0.4},
+interface ILastProps{
+    last : DocumentData[] | undefined
+}
+
+const variants = {
+  hidden: { y : -200, opacity : 0},
   visible: {
     y : 0,
     opacity:1,
-    transition: {
-      delayChildren: 0.5,
-      staggerChildren: 0.5,
-    },
+    transition : {
+      duration : 1,
+    }
   },
+  exit: {
+    y : -200, opacity : 0
+  }
 };
 
-const child = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-  },
-};
-
-interface IUpcomingProps{
-    upcoming : DocumentData[] | undefined
-}
-
-function Upcoming({upcoming}:IUpcomingProps) {
+function Last({last}:ILastProps) {
   return (
-    <Box variants={parent} initial="hidden" animate="visible">
-      <Title variants={child}> UPCOMING SCHDULE </Title>
-      {upcoming ? (
+    <Box variants={variants} initial="hidden" animate="visible" exit="exit">
+      <Title> Last Matches </Title>
+      {last ? (
         <Grid>
-          {upcoming.map((d) => (
-            <motion.div variants={child}>
+          {last.map((d) => (
             <Match {...d} />
-            </motion.div>
           ))}
         </Grid>
       ) : (
         <Loader />
       )}
     </Box>
-  );
+  )
 }
 
-export default Upcoming;
+export default Last
