@@ -70,7 +70,7 @@ function Match(data: DocumentData) {
       <Teams>
         <Team>
           <img
-            src={require(`../../images/${data.teamA}_reverse.png`)}
+            src={require(`../../images/${data.teamA}.png`)}
             alt={"Team's Icon"}
           />
           <label>{data.teamA}</label>
@@ -84,7 +84,7 @@ function Match(data: DocumentData) {
         )}
         <Team>
           <img
-            src={require(`../../images/${data.teamB}_reverse.png`)}
+            src={require(`../../images/${data.teamB}.png`)}
             alt={"Team's Icon"}
           />
           <label>{data.teamB}</label>

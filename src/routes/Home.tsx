@@ -18,9 +18,9 @@ const Main = styled.div`
   justify-content: space-evenly;
   align-items: flex-start;
   margin-bottom: 100px;
-  @media (max-width:1200px) {
-    flex-direction: column ;
-    align-items: center ;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 const Sub = styled.div`
@@ -33,9 +33,12 @@ const Sub = styled.div`
     margin: 20px;
     font-size: 32px;
   }
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const LCK_LIVE = styled.div`
-  min-width: 1080px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,10 +58,10 @@ const SNS = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  div{
+  & div {
     height: 310px;
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
   }
   svg {
     margin: 20px;
@@ -80,33 +83,41 @@ const SNS = styled.div`
   }
 `;
 
+const IFrame = styled.iframe`
+  max-width: 1080px;
+  max-height: 607.5px;
+  width: 70vw;
+  height: calc(70vw*9/16);
+  min-width: 400px;
+  min-height: 225px;
+`;
+
 function Home() {
   const [standing, setStanding] = useState<DocumentData[]>();
   const getData = async () => {
     const document = await getDoc(que);
     //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
-    if(document.exists()){
-      const matches : IMatchProps[] = document.data().sample;
-      const convertingArr = 
-      matches.filter((a) => a.isDone);
+    if (document.exists()) {
+      const matches: IMatchProps[] = document.data().sample;
+      const convertingArr = matches.filter((a) => a.isDone);
       const sortedResults = teams
-      .map((a) => autoStandings(convertingArr, a))
-      .sort((a, b) => {
-        const Apoint = a.scoreWin - a.scoreLose;
-        const Bpoint = b.scoreWin - b.scoreLose;
-        if (a.win < b.win) return 1;
-        if (a.win > b.win) return -1;
-        if (a.win === b.win) {
-          if (Apoint < Bpoint) return 1;
-          if (Apoint > Bpoint) return -1;
+        .map((a) => autoStandings(convertingArr, a))
+        .sort((a, b) => {
+          const Apoint = a.scoreWin - a.scoreLose;
+          const Bpoint = b.scoreWin - b.scoreLose;
+          if (a.win < b.win) return 1;
+          if (a.win > b.win) return -1;
+          if (a.win === b.win) {
+            if (Apoint < Bpoint) return 1;
+            if (Apoint > Bpoint) return -1;
+            return 0;
+          }
           return 0;
-        }
-        return 0;
-      });
+        });
       setStanding(sortedResults);
     }
   };
-  
+
   useEffect(() => {
     getData();
   }, []);
@@ -116,20 +127,20 @@ function Home() {
       <Main>
         <LCK_LIVE>
           <h1>LCK LIVE</h1>
-          <iframe
+          <IFrame
             title="LCKLIVE"
             width="1080"
             height="607.5"
             src="https://player.twitch.tv/?channel=lck_korea&parent=cj-k-7.github.io&autoplay=true"
             allowFullScreen
-          ></iframe>
+          />
         </LCK_LIVE>
         <LeaderBoard standing={standing} />
       </Main>
       <Sub>
         <LCK_TV>
           <h1>LCK YOUTUBE</h1>
-          <iframe
+          <IFrame
             title="LCKYOUTUBE"
             width="550"
             height="310"
@@ -140,10 +151,10 @@ function Home() {
         <SNS>
           <h1>LCK SNS & CONTENTS</h1>
           <div>
-            <Tweet/>
-            <Faceboock/>
-            <Instagram/>
-            <Twitch/>
+            <Tweet />
+            <Faceboock />
+            <Instagram />
+            <Twitch />
           </div>
         </SNS>
       </Sub>

@@ -1,18 +1,19 @@
-import { DocumentData, getDoc, getDocsFromCache } from "firebase/firestore";
+import { DocumentData } from "firebase/firestore";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { que } from "../../firebase";
-import { autoStandings, IMatchProps, teams } from "../utills";
 import Loader from "../Layouts/Loader";
 import { createSlice } from "@reduxjs/toolkit";
 
 const Board = styled.div`
-  min-width: 600px;
-  padding: 0px 30px;
+  min-width: 400px;
+  padding: 10px 30px;
   h1 {
-    font-size: 90px;
+    text-align: center;
+    font-size: 4.5em;
     margin-bottom: 13px;
+  }
+  @media (max-width: 1200px) {
+    h1{}
   }
 `;
 const Table = styled(motion.div)`
