@@ -32,3 +32,9 @@ responsive sizing : 매 경기 정보에 대해서 grid layout 을 통해 표현
 
 처음에는 twitch 방송의 해당 live status를 api를 통해 받을 수 있는지 확인하다가, 너무 시간이 오래 걸려 다른 기능부터 진행!
 
+# 2022/3/20
+
+Play Off 일정 / TBD  추가
+Grid css 변경, 
+배포. 
+
