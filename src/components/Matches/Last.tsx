@@ -10,17 +10,22 @@ const Box = styled(motion.div)`
 `;
 const Grid = styled.div`
   width: 100vw;
-  max-height: 220px;
+  max-height: 280px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-template-rows: auto;
+  grid-row-gap: 16px;
   align-items: center;
+  & h1{
+    text-align: center;
+  }
 `;
 const Title = styled.h1`
   font-size: 30px;
   padding: 30px;
   margin: 20px 25px;
+  margin-top: 0px;
 `;
 
 interface ILastProps{
@@ -48,7 +53,10 @@ function Last({last}:ILastProps) {
       {last ? (
         <Grid>
           {last.map((d,i) => (
-            <Match {...d} key={i} />
+            <div>
+              <h1>MACTH {i+1}</h1>
+              <Match {...d} key={i} />
+            </div>
           ))}
         </Grid>
       ) : (

@@ -18,11 +18,8 @@ const Container = styled.div`
   font-size: 24px;
 `;
 
-const Tabs = styled.div`
-  display: flex;
-`;
 const Tab = styled.div`
-  margin: 16px;
+  margin: 10px;
 `;
 
 function Matches() {
@@ -30,7 +27,6 @@ function Matches() {
   const [toggle, setToggle] = useState(false);
   const filter = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch();
-  console.log(filter);
   const onChecking = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
@@ -48,6 +44,7 @@ function Matches() {
   useEffect(() => {
     getSchedule();
   }, []);
+ 
 
   const upcoming = schedules
     ?.sort((a, b) => {
@@ -65,14 +62,14 @@ function Matches() {
 
   return (
     <Container>
-      <input type="checkbox" value="T1" defaultChecked onChange={onChecking} />
+      {/* <input type="checkbox" value="T1" defaultChecked onChange={onChecking} /> */}
       {schedules ? (
         <>
-          <Upcoming upcoming={upcoming} />
           <Tab onClick={() => setToggle((pre) => !pre)}>
-            See Last matches{toggle ? "▲" : "▼"}
+            {toggle ? "Hide Last Matches▲" : "See Last matches ▼"}
           </Tab>
           {toggle ? <Last last={last} /> : null}
+          <Upcoming upcoming={upcoming} />
         </>
       ) : (
         <Loader />
