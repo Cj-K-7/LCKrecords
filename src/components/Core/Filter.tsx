@@ -9,12 +9,12 @@ const Box = styled(motion.div)`
   position: fixed;
   right: 0;
   top: 10%;
+  width:  fit-content;
   height: fit-content;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat( 2, 1fr );
+  grid-template-rows: repeat( 6, 1fr );
   border-radius: 20px;
   color: ${(props) => props.theme.modalTextColor};
   background-color: ${(props) => props.theme.modalColor};
@@ -25,7 +25,7 @@ const Box = styled(motion.div)`
     content: "FILTER";
     position: absolute;
     top: 20%;
-    left: -40px;
+    left: -30px;
     writing-mode: vertical-lr;
     border-radius: 20px 0px 0px 20px;
     padding: 10px;
@@ -36,17 +36,13 @@ const Box = styled(motion.div)`
   & p {
     display: flex;
     font-size: 20px;
-    width: 50px;
-    min-height: 50px;
+    width: 120px;
+    height: 50px;
     box-shadow: 1px 1px 1px rgba(30, 30, 30, 0.2);
-    text-align: center;
+    justify-content: center;
     align-items: center;
     opacity: 0.3;
   }
-`;
-
-const Team = styled.label`
-  padding: 10px 0px;
   & input[type="checkbox"] {
     display: none;
   }
@@ -58,6 +54,14 @@ const Team = styled.label`
     box-shadow: inset 1px 1px 1px rgba(30, 30, 30, 0.2);
   }
 `;
+const All = styled.label`
+  padding: 10px;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  `
+const Team = styled.label`
+  padding: 10px;
+`;
 
 const IMG = styled.img`
   width: 50px;
@@ -67,7 +71,7 @@ const IMG = styled.img`
 
 function Filter() {
   const [clicked, setClicked] = useState(false);
-  const [x, setX] = useState(80);
+  const [x, setX] = useState(160);
   const filter = useSelector((state: RootState) => state.filter);
   const onChecking = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -78,13 +82,13 @@ function Filter() {
   };
   const onClick = () => {
     setClicked((pre) => !pre);
-    clicked ? setX(0) : setX(80);
+    clicked ? setX(0) : setX(160);
   };
   const dispatch = useDispatch();
 
   return (
     <Box style={{ x }} onClick={onClick}>
-      <Team>
+      <All>
         <input
           type="checkbox"
           name="all"
@@ -93,7 +97,7 @@ function Filter() {
           onChange={onChecking}
         />
         <p>ALL</p>
-      </Team>
+      </All>
       {teams.map((team) => (
         <Team>
           <input

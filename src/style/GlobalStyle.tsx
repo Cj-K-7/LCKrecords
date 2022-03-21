@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
     scrollbar-width: none; /* Firefox */
 }
 body {
+	height: 100vh;
 	-ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 	font-size: 1.2em;
@@ -54,6 +55,7 @@ body {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 	font-family: 'Orbitron', sans-serif;
 	overflow-x: hidden;
+	overflow-y: auto;
 	&::-webkit-scrollbar{
 		display: none;
 	}
