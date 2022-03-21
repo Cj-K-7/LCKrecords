@@ -66,9 +66,9 @@ const Versus = styled.div`
 `;
 const Tie = styled.div`
   position: absolute;
-  top: 20px;
-  left: 30px;
-  transform: rotateZ(45deg);
+  top: 15px;
+  left: 40px;
+  transform: rotateZ(-5deg);
 `;
 
 function Match(data: DocumentData) {

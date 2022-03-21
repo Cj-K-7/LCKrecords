@@ -9,7 +9,7 @@ import { groupbyDay, monthDay } from "../utills";
 const Box = styled(motion.div)`
   transform-origin: top;
 `;
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   width: 100vw;
   max-height: 380px;
   overflow-y: auto;
@@ -30,7 +30,7 @@ const Title = styled.h1`
   margin-top: 0px;
 `;
 
-const Div = styled.div`
+const Div = styled(motion.div)`
   margin-bottom: 40px;
 `
 const Day = styled.h1`
@@ -56,6 +56,25 @@ const variants = {
   },
 };
 
+const parent = {
+  hidden: { opacity : 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay : 1,
+      delayChildren: 1.3,
+    },
+  },
+};
+
+const child = {
+  hidden: { y : -100, opacity: 0 },
+  visible: {
+    y : 0,
+    opacity: 1,
+  },
+};
+
 function Last({ last }: ILastProps) {
   const refs = document.getElementsByClassName(`match`);
   const grouped = groupbyDay(last ? last : []);
@@ -68,9 +87,9 @@ function Last({ last }: ILastProps) {
     <Box variants={variants} initial="hidden" animate="visible" exit="exit">
       <Title> Last Matches </Title>
       {last ? (
-        <Grid id='grid'>
+        <Grid id='grid' variants={parent} initial="hidden" animate="visible">
           {keys.map((key, i) => (
-            <Div className="match" key={i}>
+            <Div variants={child} className="match" key={i}>
               <Day>{key}</Day>
               {grouped[key].map((data, i) => (
                 <Match key ={i} {...data} />

@@ -3,6 +3,7 @@ import { add, remove, RootState } from "../../store";
 import styled from "styled-components";
 import { teams } from "../utills";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const Box = styled(motion.div)`
   position: fixed;
@@ -18,6 +19,7 @@ const Box = styled(motion.div)`
   color: ${(props) => props.theme.modalTextColor};
   background-color: ${(props) => props.theme.modalColor};
   box-shadow: -3px 3px 3px rgba(30, 30, 30, 0.6);
+  transition: 0.83s;
   z-index: 2;
   &::before {
     content: "FILTER";
@@ -63,12 +65,9 @@ const IMG = styled.img`
   opacity: 0.3;
 `;
 
-const variant = {
-  hidden: { x: 80, opacity: 1 },
-  hover: { x: 0, opacity: 0.8 },
-};
-
 function Filter() {
+  const [clicked, setClicked] = useState(false);
+  const [x, setX] = useState(80);
   const filter = useSelector((state: RootState) => state.filter);
   const onChecking = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -77,11 +76,14 @@ function Filter() {
     if (!checked && filter.includes(value)) dispatch(remove(value));
     else dispatch(add(value));
   };
-
+  const onClick = () => {
+    setClicked((pre) => !pre);
+    clicked ? setX(0) : setX(80);
+  };
   const dispatch = useDispatch();
 
   return (
-    <Box variants={variant} initial="hidden" whileHover="hover">
+    <Box style={{ x }} onClick={onClick}>
       <Team>
         <input
           type="checkbox"

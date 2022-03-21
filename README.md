@@ -48,3 +48,4 @@ Grid css 변경,
  Javascript document.getElementsbyClassName 을 이용해서 마지막 해당 엘레먼트에  
  Landing 되게끔. scrolltoView() 사용. (useEffect)
 
+3. redux tool-kit 을 이용한 팀별 매치 필터링 기능 추가.
