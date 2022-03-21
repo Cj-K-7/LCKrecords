@@ -3,7 +3,7 @@ import { add, remove, RootState } from "../../store";
 import styled from "styled-components";
 import { teams } from "../utills";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Box = styled(motion.div)`
   position: fixed;
@@ -54,11 +54,7 @@ const Box = styled(motion.div)`
     box-shadow: inset 1px 1px 1px rgba(30, 30, 30, 0.2);
   }
 `;
-const All = styled.label`
-  padding: 10px;
-  grid-column: 1 / 3;
-  grid-row: 1;
-  `
+
 const Team = styled.label`
   padding: 10px;
 `;
@@ -94,7 +90,7 @@ function Filter() {
             type="checkbox"
             name={team}
             value={team}
-            defaultChecked
+            defaultChecked={ filter.includes(team) }
             onChange={onChecking}
           />
           <IMG

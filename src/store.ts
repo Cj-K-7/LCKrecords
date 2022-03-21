@@ -6,7 +6,7 @@ const springDataSlice = createSlice({
   initialState: teams,
   reducers: {
     add: (state, action: PayloadAction<string>) => {
-      state.push(action.payload);
+      return [...teams, action.payload];
     },
     remove : (state, action: PayloadAction<string>) =>{
       return state.filter(a=> a!==action.payload);
