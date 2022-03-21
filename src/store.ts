@@ -1,8 +1,9 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { teams } from "./components/utills";
 
 const springDataSlice = createSlice({
   name: "filter",
-  initialState: ["all"],
+  initialState: teams,
   reducers: {
     add: (state, action: PayloadAction<string>) => {
       state.push(action.payload);

@@ -14,7 +14,7 @@ const Box = styled(motion.div)`
   padding: 20px;
   display: grid;
   grid-template-columns: repeat( 2, 1fr );
-  grid-template-rows: repeat( 6, 1fr );
+  grid-template-rows: repeat( 5, 1fr );
   border-radius: 20px;
   color: ${(props) => props.theme.modalTextColor};
   background-color: ${(props) => props.theme.modalColor};
@@ -88,21 +88,13 @@ function Filter() {
 
   return (
     <Box style={{ x }} onClick={onClick}>
-      <All>
-        <input
-          type="checkbox"
-          name="all"
-          value="all"
-          onChange={onChecking}
-        />
-        <p>ALL</p>
-      </All>
       {teams.map((team) => (
         <Team>
           <input
             type="checkbox"
             name={team}
             value={team}
+            defaultChecked
             onChange={onChecking}
           />
           <IMG
