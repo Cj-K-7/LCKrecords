@@ -93,7 +93,6 @@ function Filter() {
           type="checkbox"
           name="all"
           value="all"
-          defaultChecked
           onChange={onChecking}
         />
         <p>ALL</p>

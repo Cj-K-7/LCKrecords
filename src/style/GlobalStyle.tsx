@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
     scrollbar-width: none; /* Firefox */
 }
 body {
-	height: 100vh;
+	min-height: 100vh;
 	-ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 	font-size: 1.2em;
