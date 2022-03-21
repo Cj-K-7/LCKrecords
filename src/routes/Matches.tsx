@@ -1,13 +1,14 @@
 import { DocumentData, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Filter from "../components/Core/Filter";
 import Loader from "../components/Layouts/Loader";
 import Last from "../components/Matches/Last";
 import Upcoming from "../components/Matches/Upcoming";
 import { IMatchProps } from "../components/utills";
 import { que } from "../firebase";
-import { add, RootState } from "../store";
+import { RootState } from "../store";
 
 const Container = styled.div`
   width: 100vw;
@@ -26,13 +27,7 @@ function Matches() {
   const [schedules, setSchedules] = useState<DocumentData[]>();
   const [toggle, setToggle] = useState(false);
   const filter = useSelector((state: RootState) => state.filter);
-  const dispatch = useDispatch();
-  const onChecking = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      currentTarget: { value },
-    } = event;
-    dispatch(add(value));
-  };
+
   const getSchedule = async () => {
     const document = await getDoc(que);
     if (document.exists()) {
@@ -44,25 +39,30 @@ function Matches() {
   useEffect(() => {
     getSchedule();
   }, []);
- 
 
-  const upcoming = schedules
+  const filterd = filter.includes("all")
+    ? schedules
+    : schedules?.filter(
+        (a) => filter.includes(a.teamA) || filter.includes(a.teamB)
+      );
+
+  const upcoming = filterd
     ?.sort((a, b) => {
       if (new Date(a.date) > new Date(b.date)) return 1;
       return -1;
     })
     .filter((a) => +new Date(a.date) >= +new Date() - 10800000);
 
-  const last = schedules
+  const last = filterd
     ?.sort((a, b) => {
       if (new Date(a.date) > new Date(b.date)) return 1;
       return -1;
     })
     .filter((a) => +new Date(a.date) < +new Date() - 10800000);
-  
+
   return (
     <Container>
-      {/* <input type="checkbox" value="T1" defaultChecked onChange={onChecking} /> */}
+      <Filter/>
       {schedules ? (
         <>
           <Upcoming upcoming={upcoming} />

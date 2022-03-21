@@ -1,8 +1,8 @@
 import { DocumentData } from "firebase/firestore";
 import styled from "styled-components";
-import { IMatchProps } from "../utills";
 
 const Schedule = styled.div<{ month: number; date: number }>`
+  position: relative;
   display: flex;
   min-width: 300px;
   flex-direction: column;
@@ -33,7 +33,7 @@ const Day = styled.div`
   font-size: 28px;
   text-align: center;
   margin-bottom: 12px;
-  & h1{
+  & h1 {
   }
 `;
 const Teams = styled.div`
@@ -64,6 +64,12 @@ const Versus = styled.div`
   margin: 0px 24px;
   padding-bottom: 12px;
 `;
+const Tie = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  transform: rotateZ(45deg);
+`;
 
 function Match(data: DocumentData) {
   const d_day = new Date(data.date);
@@ -72,6 +78,7 @@ function Match(data: DocumentData) {
   const time = `${d_day.getHours()}:00`;
   return (
     <Schedule key={data.date} month={month} date={date}>
+      {data.tiebreaker ? <Tie>Tie Breaker</Tie> : null}
       <Day>
         {data.round >= 3 ? (
           data.round === 5 ? (
@@ -80,9 +87,7 @@ function Match(data: DocumentData) {
             <h1>Play-Off Round{data.round - 2}</h1>
           )
         ) : null}
-        <span>
-          {data.scoreA ? null : time}
-        </span>
+        <span>{data.scoreA ? null : time}</span>
       </Day>
       <Teams>
         <Team>
