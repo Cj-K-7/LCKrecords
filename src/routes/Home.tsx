@@ -62,6 +62,11 @@ const SNS = styled.div`
     height: 310px;
     display: flex;
     align-items: center;
+    @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+  }
   }
   svg {
     margin: 20px;
@@ -90,6 +95,7 @@ const IFrame = styled.iframe`
   height: calc(70vw*9/16);
   min-width: 400px;
   min-height: 225px;
+  margin-bottom: 30px;
 `;
 
 function Home() {

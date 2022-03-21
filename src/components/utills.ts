@@ -43,8 +43,13 @@ export interface groupbyDayProps {
   [date: string]: IMatchProps[];
 }
 
+const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+
 export const monthDay = (date: string) => {
-  return `${new Date(date).getMonth() + 1}.${new Date(date).getDate()}`;
+  const m = new Date(date).getMonth();
+  const d = new Date(date).getDate();
+  const weekDay = day[new Date(date).getDay()];
+  return `${m + 1}.${d} ${weekDay}`;
 };
 
 export const groupbyDay = (arr: DocumentData[]) => {

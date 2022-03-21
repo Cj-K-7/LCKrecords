@@ -12,10 +12,11 @@ const Board = styled.div`
     font-size: 4.5em;
     margin-bottom: 13px;
   }
-  @media (max-width: 1200px) {
-    h1{}
+  @media (max-width:1200px) {
+    transform: scale(0.8);
   }
 `;
+
 const Table = styled(motion.div)`
   display: grid;
   grid-template-rows: repeat(10, 1fr);
