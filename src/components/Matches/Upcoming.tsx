@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import Match from "../Core/Match";
 import Loader from "../Layouts/Loader";
+import { monthDay } from "../utills";
 
 
 const Box = styled(motion.div)`
+  margin-bottom: 50px;
 `;
 const Grid = styled.div`
   width: 100vw;
@@ -19,6 +21,10 @@ const Title = styled(motion.h1)`
   padding: 30px;
   margin: 20px 25px;
 `;
+const Date = styled.h1`
+  text-align: center;
+  font-size: 28px;
+`
 
 const parent = {
   hidden: { y : -100, opacity : 0.4},
@@ -51,6 +57,7 @@ function Upcoming({upcoming}:IUpcomingProps) {
         <Grid>
           {upcoming.map((d,i) => (
             <motion.div key={i}variants={child}>
+              <Date>{monthDay(d.date)}</Date>
             <Match {...d} />
             </motion.div>
           ))}

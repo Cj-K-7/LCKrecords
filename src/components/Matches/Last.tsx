@@ -1,23 +1,25 @@
 import { DocumentData } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Match from "../Core/Match";
 import Loader from "../Layouts/Loader";
-
+import { groupbyDay, monthDay } from "../utills";
 
 const Box = styled(motion.div)`
   transform-origin: top;
 `;
 const Grid = styled.div`
   width: 100vw;
-  max-height: 280px;
+  max-height: 380px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-template-rows: auto;
   grid-row-gap: 16px;
-  align-items: center;
-  & h1{
+  justify-content: center;
+  align-items: flex-start;
+  & h1 {
     text-align: center;
   }
 `;
@@ -28,42 +30,59 @@ const Title = styled.h1`
   margin-top: 0px;
 `;
 
-interface ILastProps{
-    last : DocumentData[] | undefined
+const Div = styled.div`
+  margin-bottom: 40px;
+`
+const Day = styled.h1`
+  font-size: 30px;
+`;
+
+interface ILastProps {
+  last: DocumentData[] | undefined;
 }
 
 const variants = {
-  hidden: { y : -200, opacity : 0},
+  hidden: { y: -200, opacity: 0 },
   visible: {
-    y : 0,
-    opacity:1,
-    transition : {
-      duration : 1,
-    }
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
   },
   exit: {
-    y : -200, opacity : 0
-  }
+    y: -200,
+    opacity: 0,
+  },
 };
 
-function Last({last}:ILastProps) {
+function Last({ last }: ILastProps) {
+  const refs = document.getElementsByClassName(`match`);
+  const grouped = groupbyDay(last ? last : []);
+  const keys = Object.keys(grouped);
+  useEffect(()=>{
+    refs.item(refs.length-1)?.scrollIntoView();
+  },[])
+
   return (
     <Box variants={variants} initial="hidden" animate="visible" exit="exit">
       <Title> Last Matches </Title>
       {last ? (
-        <Grid>
-          {last.map((d,i) => (
-            <div>
-              <h1>MACTH {i+1}</h1>
-              <Match {...d} key={i} />
-            </div>
+        <Grid id='grid'>
+          {keys.map((key, i) => (
+            <Div className="match" key={i}>
+              <Day>{key}</Day>
+              {grouped[key].map((data, i) => (
+                <Match key ={i} {...data} />
+              ))}
+            </Div>
           ))}
         </Grid>
       ) : (
         <Loader />
       )}
     </Box>
-  )
+  );
 }
 
-export default Last
+export default Last;

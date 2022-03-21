@@ -40,15 +40,31 @@ export const autoStandings = (arr: DocumentData[], team: string) => {
 };
 
 export interface groupbyDayProps {
-  [date : string] : IMatchProps[]
+  [date: string]: IMatchProps[];
 }
+
+export const monthDay = (date: string) => {
+  return `${new Date(date).getMonth() + 1}.${new Date(date).getDate()}`;
+};
+
+export const groupbyDay = (arr: DocumentData[]) => {
+  return arr.reduce((a, c) => {
+    const key = monthDay(c.date);
+    if (!a[key]) {
+      a[key] = [];
+    }
+    a[key].push(c);
+    return a;
+  }, {}) as groupbyDayProps;
+};
 
 export interface IMatchProps {
   date: string;
   round: number;
   isDone: boolean;
   teamA: string;
-  scoreA: string;
+  scoreA: string | undefined;
   teamB: string;
-  scoreB: string;
+  scoreB: string | undefined;
+  tiebreaker: boolean | undefined;
 }

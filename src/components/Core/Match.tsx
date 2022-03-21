@@ -1,5 +1,6 @@
 import { DocumentData } from "firebase/firestore";
 import styled from "styled-components";
+import { IMatchProps } from "../utills";
 
 const Schedule = styled.div<{ month: number; date: number }>`
   display: flex;
@@ -8,8 +9,7 @@ const Schedule = styled.div<{ month: number; date: number }>`
   align-items: center;
   justify-items: center;
   padding-top: 20px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 25px;
   ${(props) =>
     props.month === new Date().getMonth() && props.date === new Date().getDate()
       ? `   background-image: linear-gradient(
@@ -81,7 +81,7 @@ function Match(data: DocumentData) {
           )
         ) : null}
         <span>
-          {month + 1}.{date} {data.scoreA ? null : time}
+          {data.scoreA ? null : time}
         </span>
       </Day>
       <Teams>

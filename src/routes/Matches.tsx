@@ -59,17 +59,17 @@ function Matches() {
       return -1;
     })
     .filter((a) => +new Date(a.date) < +new Date() - 10800000);
-
+  
   return (
     <Container>
       {/* <input type="checkbox" value="T1" defaultChecked onChange={onChecking} /> */}
       {schedules ? (
         <>
+          <Upcoming upcoming={upcoming} />
           <Tab onClick={() => setToggle((pre) => !pre)}>
             {toggle ? "Hide Last Matches▲" : "See Last matches ▼"}
           </Tab>
           {toggle ? <Last last={last} /> : null}
-          <Upcoming upcoming={upcoming} />
         </>
       ) : (
         <Loader />

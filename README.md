@@ -38,3 +38,13 @@ Play Off 일정 / TBD  추가
 Grid css 변경, 
 배포. 
 
+# 2022/3/21
+
+1. 지난 경기 날짜별 grouping 을 다시 하기 위해 reduce 함수 사용
+
+2. 해당 날짜내 이뤄진 경기를 묶고, 지난 경기 기록을 보고 싶을때 기준을
+ 최근 끝난 경기를 가져오게끔 하기 위해  
+
+ Javascript document.getElementsbyClassName 을 이용해서 마지막 해당 엘레먼트에  
+ Landing 되게끔. scrolltoView() 사용. (useEffect)
+
