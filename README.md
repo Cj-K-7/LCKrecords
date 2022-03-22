@@ -49,3 +49,8 @@ Grid css 변경,
  Landing 되게끔. scrolltoView() 사용. (useEffect)
 
 3. redux tool-kit 을 이용한 팀별 매치 필터링 기능 추가. 간단한 애니메이션 추가
+
+# 2022/3/22
+
+FIREBASE AUTH popup invalid 상태 
+Google API key 의 AUTH 설정에서 보안 문제로 도메인이 막힘.... 해결..
