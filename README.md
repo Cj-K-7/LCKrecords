@@ -53,4 +53,4 @@ Grid css 변경,
 # 2022/3/22
 
 FIREBASE AUTH popup invalid 상태 
-Google API key 의 AUTH 설정에서 보안 문제로 도메인이 막힘.... 해결..
+Google API key 에서 자동으로 AUTH 보안 설정되어 SNS를 통한 로그인 시도시 도메인이 막힘..., 도메인 재등록으로 해결..
