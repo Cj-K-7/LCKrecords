@@ -9,6 +9,9 @@ import {
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { toggle } from "../store";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -73,12 +76,15 @@ interface IForm {
 
 function Auth() {
   const [isNew, setIsNew] = useState(false);
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+  const noLogIn = () => {dispatch(toggle(true)); navigation('/')}
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-
+  
   const onSubmit = (data: IForm) => {
     //Sign in/up with email/pw
     if (isNew) {
@@ -86,8 +92,8 @@ function Auth() {
       if (data.password === data.confirmPW) {
         //생성 완료
         createUserWithEmailAndPassword(auth, data.email, data.password)
-          .then((userCredentail) => {
-            console.log(userCredentail.user);
+        .then((userCredentail) => {
+          console.log(userCredentail.user);
           })
           .catch((err) => {
             console.log("signing UP Err :" + err.code);
@@ -125,12 +131,13 @@ function Auth() {
     google: new GoogleAuthProvider(),
     github: new GithubAuthProvider(),
   };
+  
   const signWithSNS = (provider: GoogleAuthProvider | GithubAuthProvider) =>
-    signInWithPopup(auth, provider)
-      .then((userCredentail) => {
-        // const token =
-        // GoogleAuthProvider.credentialFromResult(userCredentail)?.accessToken;
-        console.log(userCredentail.user);
+  signInWithPopup(auth, provider)
+  .then((userCredentail) => {
+    // const token =
+    // GoogleAuthProvider.credentialFromResult(userCredentail)?.accessToken;
+    console.log(userCredentail.user);
       })
       .catch((err) => {
         console.log(`${provider} login err :` + err.code);
@@ -146,9 +153,9 @@ function Auth() {
       currentTarget: { name },
     } = event;
     if (name === "Google") {
-      signWithSNS(providers.google);
+      signWithSNS(providers.google).then(()=>navigation('/'));
     } else if (name === "Github") {
-      signWithSNS(providers.github);
+      signWithSNS(providers.github).then(()=>navigation('/'));
     }
   };
 
@@ -190,6 +197,9 @@ function Auth() {
           </BTN>
           <BTN onClick={() => setIsNew((prev) => !prev)}>
             {isNew ? "Go to Sign In" : "Go to create Account"}
+          </BTN>
+          <BTN onClick={noLogIn}>
+            CONTINUE WITHOUT LOG IN
           </BTN>
         </Options>
       </Box>

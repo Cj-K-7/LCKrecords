@@ -19,14 +19,6 @@ const Schedule = styled.div<{ month: number; date: number }>`
             transparent 50%
             );`
       : ``}
-  &::after {
-    content: "";
-    width: 60%;
-    height: 2px;
-    position: relative;
-    bottom: -25px;
-    background-color: ${(props) => props.theme.textColor};
-  }
 `;
 
 const Day = styled.div`

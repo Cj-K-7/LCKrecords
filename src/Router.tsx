@@ -7,32 +7,39 @@ import Matches from "./routes/Matches";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Header from "./components/Layouts/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, toggle } from "./store";
 
 function AppRouter() {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogedIn = useSelector((state: RootState) => state.loginStatus);
+  const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsLogin(true);
+        dispatch(toggle(true));
       } else {
-        setIsLogin(false);
+        dispatch(toggle(false));
       }
     });
   }, []);
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Header />
-          <Routes>
-            {isLogin ? (
-              <>
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/matches/*" element={<Matches />} />
-                <Route path="/" element={<Home />} />
-              </>
-            ) : (
-              <Route path="/*" element={<Auth />} />
-            )}
-          </Routes>
+      <Header />
+      <Routes>
+        {isLogedIn ? (
+          <>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/matches/*" element={<Matches />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
+          </>
+        ) : (
+          <>
+            <Route path="/*" element={<Auth />} />
+            <Route path="/auth" element={<Auth />} />
+          </>
+        )}
+      </Routes>
     </BrowserRouter>
   );
 }

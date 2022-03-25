@@ -69,6 +69,7 @@ function Filter() {
   const [clicked, setClicked] = useState(false);
   const [x, setX] = useState(160);
   const filter = useSelector((state: RootState) => state.filter);
+  const dispatch = useDispatch();
   const onChecking = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value, checked },
@@ -80,7 +81,6 @@ function Filter() {
     setClicked((pre) => !pre);
     clicked ? setX(0) : setX(160);
   };
-  const dispatch = useDispatch();
 
   return (
     <Box style={{ x }} onClick={onClick}>

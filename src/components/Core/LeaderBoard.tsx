@@ -5,7 +5,7 @@ import Loader from "../Layouts/Loader";
 import { createSlice } from "@reduxjs/toolkit";
 
 const Board = styled.div`
-  min-width: 400px;
+  min-width: 300px;
   padding: 10px 30px;
   h1 {
     text-align: center;

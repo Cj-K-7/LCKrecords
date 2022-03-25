@@ -54,7 +54,7 @@ body {
 	-ms-user-select: none; /* Internet Explorer/Edge */
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 	font-family: 'Orbitron', sans-serif;
-	overflow-x: hidden;
+	overflow-x: auto;
 	overflow-y: auto;
 	&::-webkit-scrollbar{
 		display: none;
@@ -120,7 +120,7 @@ input[type=number]::-webkit-outer-spin-button {
         background-position: 0% 50%;
     }
     50% {
-        background-position: 100% 50%;
+        background-position: 80% 65%;
     }
     100% {
         background-position: 0% 50%;
