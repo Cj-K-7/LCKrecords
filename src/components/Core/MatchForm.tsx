@@ -128,14 +128,14 @@ function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
                 <TeamScore
                   defaultValue={0}
                   min={0}
-                  max={2}
+                  max={3}
                   {...register("scoreA", { required: true })}
                 />
                 -
                 <TeamScore
                   defaultValue={0}
                   min={0}
-                  max={2}
+                  max={3}
                   {...register("scoreB", { required: true })}
                 />
               </ControlBox>

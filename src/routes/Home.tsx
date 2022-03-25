@@ -105,7 +105,7 @@ function Home() {
     //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
     if (document.exists()) {
       const matches: IMatchProps[] = document.data().sample;
-      const convertingArr = matches.filter((a) => a.isDone);
+      const convertingArr = matches.filter((a) => a.isDone && a.round <= 2 );
       const sortedResults = teams
         .map((a) => autoStandings(convertingArr, a))
         .sort((a, b) => {
@@ -119,7 +119,8 @@ function Home() {
             return 0;
           }
           return 0;
-        });
+        })
+        ;
       setStanding(sortedResults);
     }
   };

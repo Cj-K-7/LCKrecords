@@ -11,7 +11,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { toggle } from "../store";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -51,6 +51,9 @@ const Password = styled.input.attrs({ type: "password" })`
 `;
 const Submit = styled.input.attrs({ type: "submit" })`
   width: 200px;
+  &:hover {
+    box-shadow: inset 0 0 10px black;
+  }
 `;
 
 const Options = styled.div`
@@ -66,6 +69,9 @@ const BTN = styled.button`
   margin-top: 12px;
   border: none;
   border-radius: 5px;
+  &:hover {
+    box-shadow: inset 0 0 10px black;
+  }
 `;
 
 interface IForm {
@@ -198,7 +204,7 @@ function Auth() {
           <BTN onClick={() => setIsNew((prev) => !prev)}>
             {isNew ? "Go to Sign In" : "Go to create Account"}
           </BTN>
-          <BTN onClick={noLogIn}>
+          <BTN onClick={noLogIn} style={{backgroundColor : 'burlywood'}}>
             CONTINUE WITHOUT LOG IN
           </BTN>
         </Options>

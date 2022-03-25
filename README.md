@@ -54,3 +54,11 @@ Grid css 변경,
 
 FIREBASE AUTH popup invalid 상태 
 Google API key 에서 자동으로 AUTH 보안 설정되어 SNS를 통한 로그인 시도시 도메인이 막힘..., 도메인 재등록으로 해결..
+
+
+# 2022/3/25
+
+1. Redux : 로그인 하지 않아도 볼 수 있도록 Contine 버튼 추가.
+2. 메인 홈의 리더보드 STANDINGS는 정규시즌만 적용(Round 1 / 2)하여 Play Off 적용 안되도록 필터링
+3. PlayOFF 요소 Matches 페이지에 추가 추후 Play Off 일정에 가까울때만 띄우도록 수정 및 디자인 개선 필요.
+

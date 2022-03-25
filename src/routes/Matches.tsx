@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Filter from "../components/Core/Filter";
 import Loader from "../components/Layouts/Loader";
 import Last from "../components/Matches/Last";
+import PlayOff from "../components/Matches/PlayOff";
 import Upcoming from "../components/Matches/Upcoming";
 import { IMatchProps } from "../components/utills";
 import { que } from "../firebase";
@@ -24,7 +25,7 @@ const Tab = styled.div`
 `;
 
 function Matches() {
-  const [schedules, setSchedules] = useState<DocumentData[]>();
+  const [schedules, setSchedules] = useState<IMatchProps[]>();
   const [toggle, setToggle] = useState(false);
   const filter = useSelector((state: RootState) => state.filter);
 
@@ -60,9 +61,17 @@ function Matches() {
     })
     .filter((a) => +new Date(a.date) < +new Date() - 10800000);
 
+  const playOff = schedules?.filter(a=>a.round > 2).sort((a, b) => {
+    if (new Date(a.date) > new Date(b.date)) return 1;
+    return -1;
+  })
+
   return (
     <Container>
       <Filter/>
+      {playOff ?
+      <PlayOff poTeams={playOff}/> : null
+    }
       {schedules ? (
         <>
           <Upcoming upcoming={upcoming} />

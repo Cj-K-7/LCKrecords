@@ -1,10 +1,10 @@
 import { DocumentData } from "firebase/firestore";
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Match from "../Core/Match";
 import Loader from "../Layouts/Loader";
-import { groupbyDay, monthDay } from "../utills";
+import { groupbyDay } from "../utills";
 
 const Box = styled(motion.div)`
   transform-origin: top;
@@ -14,7 +14,7 @@ const Grid = styled(motion.div)`
   max-height: 380px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(1, minmax(350px, 1fr));
   grid-template-rows: auto;
   grid-row-gap: 16px;
   justify-content: center;
@@ -34,7 +34,8 @@ const Div = styled(motion.div)`
   margin-bottom: 40px;
 `
 const Day = styled.h1`
-  font-size: 30px;
+  font-size: 34px;
+  margin-bottom: 10px;
 `;
 
 interface ILastProps {
