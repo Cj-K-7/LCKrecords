@@ -1,5 +1,8 @@
 # LCK RECORDS 
 
+# Twitch live status 추가 필요
+# 일정에 따른 기능 구현에 대해서 재사용가능하게끔 변경 고민.
+
   React / Typescript / Firebase
   
   routing pages 
