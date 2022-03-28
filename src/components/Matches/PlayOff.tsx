@@ -14,7 +14,7 @@ const Title = styled.h1`
   margin-bottom: 24px;
   font-size: 56px;
   & h2 {
-    font-size: 38px;
+    font-size: 44px;
   }
 `;
 
@@ -40,7 +40,7 @@ function PlayOff({ poTeams }: IPOprops) {
   return (
     <Container>
       <Title>
-        <h2>2022 SPRING</h2>PLAYOFF
+        <h2>2022 SPRING</h2>PLAYOFFS
       </Title>
       <Rounds>
         <Round1>

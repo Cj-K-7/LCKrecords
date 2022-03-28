@@ -22,9 +22,9 @@ const Schedule = styled.div<{ month: number; date: number }>`
     &:hover {
       background-image: linear-gradient(
             120deg,
-            rgb(204, 59, 45),
-            5%,
-            transparent 50%
+            rgba(234, 20, 20, 0.6),
+            16%,
+            transparent 63%
             );
     }
 `;
@@ -80,7 +80,7 @@ function Match(data: DocumentData) {
       <Day>
         {data.round >= 3 ? (
           data.round === 5 ? (
-            <h1>FINAL</h1>
+            <h1>FINALS</h1>
           ) : (
             <h1>Play-Off Round{data.round - 2}</h1>
           )

@@ -22,6 +22,10 @@ const Container = styled.div`
 
 const Tab = styled.div`
   margin: 10px;
+  font-size: 40px;
+  &:hover {
+    color : ${props=> props.theme.textHover};
+  }
 `;
 
 function Matches() {
