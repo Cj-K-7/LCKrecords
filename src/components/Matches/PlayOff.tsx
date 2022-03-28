@@ -23,6 +23,10 @@ const Rounds = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  @media (max-width: 1200px) {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 `;
 const Round1 = styled.div``;
 const Round2 = styled.div``;
