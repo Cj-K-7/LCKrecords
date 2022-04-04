@@ -5,7 +5,6 @@ import Match from "../Core/Match";
 import Loader from "../Layouts/Loader";
 import { monthDay } from "../utills";
 
-
 const Box = styled(motion.div)`
   margin-bottom: 50px;
 `;
@@ -24,13 +23,13 @@ const Title = styled(motion.h1)`
 const Date = styled.h1`
   text-align: center;
   font-size: 28px;
-`
+`;
 
 const parent = {
-  hidden: { y : -100, opacity : 0.4},
+  hidden: { y: -100, opacity: 0.4 },
   visible: {
-    y : 0,
-    opacity:1,
+    y: 0,
+    opacity: 1,
     transition: {
       delayChildren: 0.5,
       staggerChildren: 0.5,
@@ -45,23 +44,27 @@ const child = {
   },
 };
 
-interface IUpcomingProps{
-    upcoming : DocumentData[] | undefined
+interface IUpcomingProps {
+  upcoming: DocumentData[] | undefined;
 }
 
-function Upcoming({upcoming}:IUpcomingProps) {
+function Upcoming({ upcoming }: IUpcomingProps) {
   return (
     <Box variants={parent} initial="hidden" animate="visible">
       <Title variants={child}> UPCOMING SCHDULE </Title>
       {upcoming ? (
-        <Grid>
-          {upcoming.map((d,i) => (
-            <motion.div key={i}variants={child}>
-              <Date>{monthDay(d.date)}</Date>
-            <Match {...d} />
-            </motion.div>
-          ))}
-        </Grid>
+        upcoming.length === 0 ? (
+          <Date>No Upcoming Matches</Date>
+        ) : (
+          <Grid>
+            {upcoming.map((d, i) => (
+              <motion.div key={i} variants={child}>
+                <Date>{monthDay(d.date)}</Date>
+                <Match {...d} />
+              </motion.div>
+            ))}
+          </Grid>
+        )
       ) : (
         <Loader />
       )}

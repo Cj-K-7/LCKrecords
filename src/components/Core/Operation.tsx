@@ -25,10 +25,11 @@ function Operation() {
     //const que = query(doc(database, "DB", "SpringSplit"));
     if (document.exists()) {
       const matches: IMatchProps[] = document.data().sample;
-      matches
-        .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
-        .filter((a) => !a.isDone);
-      setLeftMatches(matches);
+      setLeftMatches(
+        matches
+          .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
+          .filter((a) => !a.isDone)
+      );
     }
   };
 
@@ -38,7 +39,7 @@ function Operation() {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, []);
 
   return (
     <Container>
@@ -46,18 +47,22 @@ function Operation() {
       <br />
       {/* <button onClick={() => sb()}>aa</button> */}
       {leftMatches ? (
-        <>
-          {leftMatches.map((match, index) => (
-            <MatchForm
-              key={match.date}
-              round={match.round}
-              date={match.date}
-              teamA={match.teamA}
-              teamB={match.teamB}
-              isDone={match.isDone}
-            />
-          ))}
-        </>
+        leftMatches.length === 0 ? (
+          <h1> No upcoming Matches </h1>
+        ) : (
+          <>
+            {leftMatches.map((match, index) => (
+              <MatchForm
+                key={match.date}
+                round={match.round}
+                date={match.date}
+                teamA={match.teamA}
+                teamB={match.teamB}
+                isDone={match.isDone}
+              />
+            ))}
+          </>
+        )
       ) : (
         <Loader />
       )}

@@ -53,7 +53,7 @@ interface IMatchProps {
   date: string;
   teamA: string;
   teamB: string;
-  isDone: number;
+  isDone: boolean;
 }
 
 interface IFormProps {

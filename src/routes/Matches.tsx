@@ -1,4 +1,4 @@
-import { DocumentData, getDoc } from "firebase/firestore";
+import { getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -16,17 +16,28 @@ const Container = styled.div`
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
   font-size: 24px;
 `;
 
 const Tab = styled.div`
   margin: 10px;
-  font-size: 40px;
+  padding-top: 28px;
+  font-size: 26px;
+  text-decoration: underline;
+  text-align: center;
   &:hover {
     color : ${props=> props.theme.textHover};
   }
 `;
+
+const Border = styled.div`
+width: 100%;
+height: 40px;
+  background-image: linear-gradient(to right, #ffffff 33%, rgba(255,255,255,0) 0%);
+background-position: bottom;
+background-size: 80px 1px;
+background-repeat: repeat-x;
+`
 
 function Matches() {
   const [schedules, setSchedules] = useState<IMatchProps[]>();
@@ -76,9 +87,11 @@ function Matches() {
       {playOff ?
       <PlayOff poTeams={playOff}/> : null
     }
+    <Border/>
       {schedules ? (
         <>
           <Upcoming upcoming={upcoming} />
+        <Border/>
           <Tab onClick={() => setToggle((pre) => !pre)}>
             {toggle ? "Hide Last Matches▲" : "See Last matches ▼"}
           </Tab>
