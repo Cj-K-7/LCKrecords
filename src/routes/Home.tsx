@@ -105,15 +105,15 @@ function Home() {
     //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
     if (document.exists()) {
       const matches: IMatchProps[] = document.data().sample;
-      const convertingArr = matches.filter((a) => a.isDone && a.round <= 2 );
+      const convertingArr = matches.filter((match) => match.isDone && match.round <= 2 );
       const sortedResults = teams
-        .map((a) => autoStandings(convertingArr, a))
-        .sort((a, b) => {
-          const Apoint = a.scoreWin - a.scoreLose;
-          const Bpoint = b.scoreWin - b.scoreLose;
-          if (a.win < b.win) return 1;
-          if (a.win > b.win) return -1;
-          if (a.win === b.win) {
+        .map((team) => autoStandings(convertingArr, team))
+        .sort((pre, next) => {
+          const Apoint = pre.scoreWin - pre.scoreLose;
+          const Bpoint = next.scoreWin - next.scoreLose;
+          if (pre.win < next.win) return 1;
+          if (pre.win > next.win) return -1;
+          if (pre.win === next.win) {
             if (Apoint < Bpoint) return 1;
             if (Apoint > Bpoint) return -1;
             return 0;

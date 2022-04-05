@@ -27,8 +27,8 @@ function Operation() {
       const matches: IMatchProps[] = document.data().sample;
       setLeftMatches(
         matches
-          .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
-          .filter((a) => !a.isDone)
+          .sort((pre, next) => (new Date(pre.date) > new Date(next.date) ? 1 : -1))
+          .filter((match) => !match.isDone)
       );
     }
   };

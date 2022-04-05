@@ -46,20 +46,20 @@ export interface groupbyDayProps {
 const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
 export const monthDay = (date: string) => {
-  const m = new Date(date).getMonth();
-  const d = new Date(date).getDate();
+  const mm = new Date(date).getMonth();
+  const dd = new Date(date).getDate();
   const weekDay = day[new Date(date).getDay()];
-  return `${m + 1}.${d} ${weekDay}`;
+  return `${mm + 1}.${dd} ${weekDay}`;
 };
 
 export const groupbyDay = (arr: DocumentData[]) => {
-  return arr.reduce((a, c) => {
-    const key = monthDay(c.date);
-    if (!a[key]) {
-      a[key] = [];
+  return arr.reduce((acc, cur) => {
+    const key = monthDay(cur.date);
+    if (!acc[key]) {
+      acc[key] = [];
     }
-    a[key].push(c);
-    return a;
+    acc[key].push(cur);
+    return acc;
   }, {}) as groupbyDayProps;
 };
 

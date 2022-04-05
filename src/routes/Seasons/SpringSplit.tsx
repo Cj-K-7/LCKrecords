@@ -20,19 +20,19 @@ const Tab = styled.div`
 function SpringSplit({seasonSplitMatchs, playOffMatches}: ISplitProps) {
     const [toggle, setToggle] = useState(false);
 
-  const upcoming = seasonSplitMatchs
-    ?.sort((a, b) => {
-      if (new Date(a.date) > new Date(b.date)) return 1;
+  const upcomings = seasonSplitMatchs
+    ?.sort((pre, next) => {
+      if (new Date(pre.date) > new Date(next.date)) return 1;
       return -1;
     })
-    .filter((a) => +new Date(a.date) >= +new Date() - 10800000);
+    .filter((match) => +new Date(match.date) >= +new Date() - 10800000);
 
-  const last = seasonSplitMatchs
-    ?.sort((a, b) => {
-      if (new Date(a.date) > new Date(b.date)) return 1;
+  const lasts = seasonSplitMatchs
+    ?.sort((pre, next) => {
+      if (new Date(pre.date) > new Date(next.date)) return 1;
       return -1;
     })
-    .filter((a) => +new Date(a.date) < +new Date() - 10800000);
+    .filter((match) => +new Date(match.date) < +new Date() - 10800000);
 
   return (
     <>
@@ -41,11 +41,11 @@ function SpringSplit({seasonSplitMatchs, playOffMatches}: ISplitProps) {
           }
             {seasonSplitMatchs ? (
               <>
-                <Upcoming upcoming={upcoming} />
+                <Upcoming upcoming={upcomings} />
                 <Tab onClick={() => setToggle((pre) => !pre)}>
                   {toggle ? "Hide Last Matches▲" : "See Last matches ▼"}
                 </Tab>
-                {toggle ? <Last last={last} /> : null}
+                {toggle ? <Last last={lasts} /> : null}
               </>
             ) : (
               <Loader />
