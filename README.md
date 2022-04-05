@@ -10,6 +10,15 @@
    1 . Auth - sign in/up , with google/github email  
    2 . Main - Use Fire/Base , get LCK games schedules, and send match result by make admin page .
 
+clone it: 
+```
+npm i install
+```
+
+start it:
+```
+npm start
+```
 # 2022/3/12
 
 ## Firestore
