@@ -65,3 +65,6 @@ Google API key 에서 자동으로 AUTH 보안 설정되어 SNS를 통한 로그
 2. 메인 홈의 리더보드 STANDINGS는 정규시즌만 적용(Round 1 / 2)하여 Play Off 적용 안되도록 필터링
 3. PlayOFF 요소 Matches 페이지에 추가 추후 Play Off 일정에 가까울때만 띄우도록 수정 및 디자인 개선 필요.
 
+# 2022/4/4
+
+upcoming 경기 없는 경우 'no upcoming matches' 표시.
