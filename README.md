@@ -68,3 +68,9 @@ Google API key 에서 자동으로 AUTH 보안 설정되어 SNS를 통한 로그
 # 2022/4/4
 
 upcoming 경기 없는 경우 'no upcoming matches' 표시.
+
+# 2022/4/5
+
+Summer season 준비를 위해 
+Matches 내에 local route 구현 및 refactoring
+추후 FireBase DB 에 Summer Season 추가시 자동으로 Summer tap 페이지 생성하도록 구현.

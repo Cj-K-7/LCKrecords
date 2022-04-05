@@ -11,8 +11,8 @@ const isLogedIn = createSlice({
   }
 })
 
-const springDataSlice = createSlice({
-  name: "filter",
+const LCKteams = createSlice({
+  name: "teamFilter",
   initialState: teams,
   reducers: {
     add: (state, action: PayloadAction<string>) => {
@@ -24,15 +24,14 @@ const springDataSlice = createSlice({
   },
 });
 
-
 const store = configureStore({
   reducer: {
-    filter: springDataSlice.reducer,
+    filter: LCKteams.reducer,
     loginStatus : isLogedIn.reducer
   },
 });
 
-export const { add, remove } = springDataSlice.actions;
+export const { add, remove } = LCKteams.actions;
 export const { toggle } = isLogedIn.actions;
 
 export type RootState = ReturnType<typeof store.getState>;

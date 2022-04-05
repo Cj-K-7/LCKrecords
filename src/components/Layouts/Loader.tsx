@@ -54,7 +54,7 @@ function Loader() {
     <Position>
       {isExeeded ? (
         <h2>
-        Maybe Server Requset <br/><br/> Or Network Problems
+        We are preparing The next Season. <br/><br/> Thank you.
         </h2>
       ) : (
         <Loading>

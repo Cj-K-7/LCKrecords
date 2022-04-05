@@ -21,9 +21,12 @@ const Margin = styled.div`
 const Menu = styled.div`
   display: flex;
   align-items: center;
-  a {
+  & a {
     cursor: pointer;
     padding: 0px 20px;
+  }
+  & a:hover {
+    color : ${props=> props.theme.textHover};
   }
 `;
 const Info = styled.div`
@@ -82,7 +85,7 @@ function Header() {
         <Margin>
           <Menu>
             <Link to="/">HOME</Link>
-            <Link to="/matches">MATCH</Link>
+            <Link to="/matches/spring">MATCH</Link>
             <Link to="/admin">ADMIN</Link>
           </Menu>
           <Info>

@@ -73,3 +73,8 @@ export interface IMatchProps {
   scoreB: string | undefined;
   tiebreaker: boolean | undefined;
 }
+
+export interface ISplitProps{
+  seasonSplitMatchs : IMatchProps[],
+  playOffMatches : IMatchProps[]
+}

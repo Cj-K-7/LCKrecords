@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LeaderBoard from "../components/Core/LeaderBoard";
 import { Faceboock, Instagram, Tweet, Twitch } from "../components/SVGs";
 import { autoStandings, IMatchProps, teams } from "../components/utills";
-import { que } from "../firebase";
+import { springSplitDB } from "../firebase";
 
 const Container = styled.div`
   width: 100%;
@@ -101,7 +101,7 @@ const IFrame = styled.iframe`
 function Home() {
   const [standing, setStanding] = useState<DocumentData[]>();
   const getData = async () => {
-    const document = await getDoc(que);
+    const document = await getDoc(springSplitDB);
     //const cache = await getDocsFromCache(que); // 오프라인 캐시 사용
     if (document.exists()) {
       const matches: IMatchProps[] = document.data().sample;

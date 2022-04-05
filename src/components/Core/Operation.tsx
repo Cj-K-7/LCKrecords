@@ -33,7 +33,7 @@ function Operation() {
     }
   };
 
-  // const sb = async () => {
+  // const setBase = async () => {
   //   await setDoc(doc(database, "DB", "SpringSplit"), {sample})
   // };
 
@@ -45,10 +45,10 @@ function Operation() {
     <Container>
       <h1>OPERATION PANEL</h1>
       <br />
-      {/* <button onClick={() => sb()}>aa</button> */}
+      {/* <button onClick={() => setBase()}>Set Base</button> */}
       {leftMatches ? (
         leftMatches.length === 0 ? (
-          <h1> No upcoming Matches </h1>
+          <h1> We Are Now Preparing Next Season , Thank You </h1>
         ) : (
           <>
             {leftMatches.map((match, index) => (

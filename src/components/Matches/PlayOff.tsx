@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import POmatch from "../Core/POmatch";
-import { LCK } from "../SVGs";
 import { IMatchProps } from "../utills";
 
 const Container = styled.div`
@@ -40,11 +39,10 @@ function PlayOff({ poTeams }: IPOprops) {
   const round1 = poTeams.filter((a) => a.round === 3);
   const round2 = poTeams.filter((a) => a.round === 4);
   const finals = poTeams.filter((a) => a.round === 5)[0];
-  console.log(finals)
   return (
     <Container>
       <Title>
-        <h2>2022 SPRING</h2>PLAYOFFS
+        <h2>2022 {'SPRING'}</h2>PLAYOFFS
       </Title>
       <Rounds>
         <Round1>

@@ -3,7 +3,7 @@ import { add, remove, RootState } from "../../store";
 import styled from "styled-components";
 import { teams } from "../utills";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Box = styled(motion.div)`
   position: fixed;

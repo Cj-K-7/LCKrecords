@@ -2,7 +2,7 @@ import { arrayRemove, arrayUnion, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { que } from "../../firebase";
+import { springSplitDB } from "../../firebase";
 import { teams } from "../utills";
 
 const Match = styled.form`
@@ -78,7 +78,7 @@ function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
       alert("check score");
       return;
     }
-    await updateDoc(que, { sample : arrayUnion({
+    await updateDoc(springSplitDB, { sample : arrayUnion({
       date,
       round,  
       isDone: true,
@@ -88,7 +88,7 @@ function MatchForm({ round, date, teamA, teamB, isDone }: IMatchProps) {
       scoreB: data.scoreB,
      })
     });
-    await updateDoc(que, { sample : arrayRemove({
+    await updateDoc(springSplitDB, { sample : arrayRemove({
       date,
       round,  
       isDone,

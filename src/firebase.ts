@@ -18,4 +18,4 @@ export const database = getFirestore(app);
 
 export const auth = getAuth();
 
-export const que = doc(database, "DB", "SpringSplit");
+export const springSplitDB = doc(database, "DB", "SpringSplit");
