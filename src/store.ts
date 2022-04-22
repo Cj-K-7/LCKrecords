@@ -24,6 +24,16 @@ const LCKteams = createSlice({
   },
 });
 
+const playOffSeason = createSlice({
+  name: "POseason",
+  initialState : false,
+  reducers: {
+    changePeriod : (state, action : PayloadAction) =>{
+
+    }
+  }
+})
+
 const store = configureStore({
   reducer: {
     filter: LCKteams.reducer,

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import Filter from "../components/Core/Filter";
+import Filter from "../components/Matches/Filter";
 import { IMatchProps } from "../components/utills";
 import { springSplitDB } from "../firebase";
 import { RootState } from "../store";

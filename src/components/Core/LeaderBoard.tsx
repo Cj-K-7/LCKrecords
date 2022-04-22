@@ -177,23 +177,23 @@ function LeaderBoard( {standing} : ILBProps) {
       </Label>
       {standing ? (
         <Table variants={tableVar} initial="hidden" animate="visible">
-          {standing?.map((a, index) => (
+          {standing?.map((team, index) => (
             <Team key={index} variants={item} transition={{ duration: 1 }}>
               <span>{index + 1}</span>
               <img
                 style={{ width: 50, height: 50 }}
-                src={require(`../../images/${a.team}_reverse.png`)}
+                src={require(`../../images/${team.team}_reverse.png`)}
                 alt={"Team's Icon"}
               />
-              <Name>{a.team}</Name>
+              <Name>{team.team}</Name>
               <span>-</span>
               <span>
-                {a.win} - {a.lose}
+                {team.win} - {team.lose}
               </span>
               <span>
-                {a.scoreWin - a.scoreLose > 0
-                  ? `+${a.scoreWin - a.scoreLose}`
-                  : `${a.scoreWin - a.scoreLose}`}
+                {team.scoreWin - team.scoreLose > 0
+                  ? `+${team.scoreWin - team.scoreLose}`
+                  : `${team.scoreWin - team.scoreLose}`}
               </span>
               <span>-</span>
             </Team>

@@ -1,8 +1,5 @@
 # LCK RECORDS 
 
-# Twitch live status 추가 필요
-# 일정에 따른 기능 구현에 대해서 재사용가능하게끔 변경 고민.
-
   React / Typescript / Firebase
   
   routing pages 
@@ -83,3 +80,9 @@ upcoming 경기 없는 경우 'no upcoming matches' 표시.
 Summer season 준비를 위해 
 Matches 내에 local route 구현 및 refactoring
 추후 FireBase DB 에 Summer Season 추가시 자동으로 Summer tap 페이지 생성하도록 구현.
+
+# ~ 2022/4/22
+
+ 폴더 정리, 추후 추가 작업
+
+ 오는 시즌 준비중 페이지 및 라우팅 정리 완료.

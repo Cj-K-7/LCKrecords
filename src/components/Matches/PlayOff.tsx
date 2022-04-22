@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import POmatch from "../Core/POmatch";
+import POmatch from "./POmatch";
 import { IMatchProps } from "../utills";
 
 const Container = styled.div`
@@ -9,7 +9,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Title = styled.h1`
+const Title = styled.div`
   margin-bottom: 24px;
   font-size: 56px;
   & h2 {

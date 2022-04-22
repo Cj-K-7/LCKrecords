@@ -85,7 +85,7 @@ function Filter() {
   return (
     <Box style={{ x }} onClick={onClick}>
       {teams.map((team) => (
-        <Team>
+        <Team key={team}>
           <input
             type="checkbox"
             name={team}

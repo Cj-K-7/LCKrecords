@@ -19,6 +19,10 @@ const Container = styled.div`
 
 function Operation() {
   const [leftMatches, setLeftMatches] = useState<DocumentData[]>();
+  const onWeekChange = (event : React.ChangeEvent<HTMLInputElement>) =>{
+    const {currentTarget : {value}} = event;
+    console.log(value);
+  }
   const getData = async () => {
     const que = doc(database, "DB", "SpringSplit");
     const document = await getDoc(que);
@@ -45,6 +49,10 @@ function Operation() {
     <Container>
       <h1>OPERATION PANEL</h1>
       <br />
+      <label>
+      Play Off period : 
+      <input onChange={onWeekChange} type="week" name="playOffSeason"></input>
+      </label>
       {/* <button onClick={() => setBase()}>Set Base</button> */}
       {leftMatches ? (
         leftMatches.length === 0 ? (

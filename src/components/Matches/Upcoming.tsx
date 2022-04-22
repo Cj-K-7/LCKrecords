@@ -1,7 +1,7 @@
 import { DocumentData } from "firebase/firestore";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import Match from "../Core/Match";
+import Match from "./Match";
 import Loader from "../Layouts/Loader";
 import { monthDay } from "../utills";
 
