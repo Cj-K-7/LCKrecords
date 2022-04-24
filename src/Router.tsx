@@ -8,7 +8,9 @@ import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Header from "./components/Layouts/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, toggle } from "./store";
+import { RootState } from "./redux-store/store";
+import { toggle } from "./redux-store/slices/loginSlice";
+import Test from "./routes/Test";
 
 function AppRouter() {
   const isLogedIn = useSelector((state: RootState) => state.loginStatus);
@@ -28,6 +30,7 @@ function AppRouter() {
       <Routes>
         {isLogedIn ? (
           <>
+            <Route path="/test" element={<Test />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/matches/*" element={<Matches />} />
             <Route path="/" element={<Home />} />

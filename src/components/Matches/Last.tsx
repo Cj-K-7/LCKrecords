@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import Match from "./Match";
 import Loader from "../Layouts/Loader";
-import { groupbyDay } from "../utills";
+import { groupbyDay } from "../utils/utils";
 
 const Box = styled(motion.div)`
   transform-origin: top;

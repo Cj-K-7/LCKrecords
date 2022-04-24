@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import Match from "./Match";
 import Loader from "../Layouts/Loader";
-import { monthDay } from "../utills";
+import { monthDay } from "../utils/utils";
 
 const Box = styled(motion.div)`
   margin-bottom: 50px;

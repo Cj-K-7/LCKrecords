@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import POmatch from "./POmatch";
-import { IMatchProps } from "../utills";
+import { IMatchProps } from "../utils/utils";
 
 const Container = styled.div`
   width: 100vw;

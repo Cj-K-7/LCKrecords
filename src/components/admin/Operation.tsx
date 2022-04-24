@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { database } from "../../firebase";
 import Loader from "../Layouts/Loader";
 import MatchForm from "./MatchForm";
-import { IMatchProps } from "../utills";
+import { IMatchProps } from "../utils/utils";
 import { schedules } from "../../samples/LCK2022SPRING";
 import { sample } from "../../samples/sample";
 

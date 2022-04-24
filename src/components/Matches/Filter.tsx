@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { add, remove, RootState } from "../../store";
 import styled from "styled-components";
-import { teams } from "../utills";
+import { teams } from "../utils/utils";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux-store/hook";
+import { add, remove } from "../../redux-store/slices/teamFilterSlice";
 
 const Box = styled(motion.div)`
   position: fixed;
@@ -68,8 +68,8 @@ const IMG = styled.img`
 function Filter() {
   const [clicked, setClicked] = useState(false);
   const [x, setX] = useState(160);
-  const filter = useSelector((state: RootState) => state.filter);
-  const dispatch = useDispatch();
+  const filter = useAppSelector(state=>state.filter)
+  const dispatch = useAppDispatch();
   const onChecking = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value, checked },

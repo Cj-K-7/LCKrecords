@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { toggle } from "../store";
+import { toggle } from "../redux-store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`

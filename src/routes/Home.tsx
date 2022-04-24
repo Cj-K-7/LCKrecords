@@ -1,9 +1,9 @@
 import { DocumentData, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import LeaderBoard from "../components/Core/LeaderBoard";
+import LeaderBoard from "../components/Home/LeaderBoard";
 import { Faceboock, Instagram, Tweet, Twitch } from "../components/SVGs";
-import { autoStandings, IMatchProps, teams } from "../components/utills";
+import { autoStandings, IMatchProps, teams } from "../components/utils/utils";
 import { springSplitDB } from "../firebase";
 
 const Container = styled.div`

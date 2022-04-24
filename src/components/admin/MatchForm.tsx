@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { springSplitDB } from "../../firebase";
-import { teams } from "../utills";
+import { teams } from "../utils/utils";
 
 const Match = styled.form`
   width: 600px;

@@ -4,7 +4,7 @@ import Loader from "../../components/Layouts/Loader";
 import Last from "../../components/Matches/Last";
 import PlayOff from "../../components/Matches/PlayOff";
 import Upcoming from "../../components/Matches/Upcoming";
-import { ISplitProps } from "../../components/utills";
+import { ISplitProps } from "../../components/utils/utils";
 
 const Tab = styled.div`
   margin: 10px;

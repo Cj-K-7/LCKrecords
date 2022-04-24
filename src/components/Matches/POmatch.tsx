@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IMatchProps, monthDay } from "../utills";
+import { IMatchProps, monthDay } from "../utils/utils";
 
 const Schedule = styled.div<{ month: number; date: number }>`
   min-width: 300px;

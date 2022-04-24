@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import App from "./App";
 import { Provider } from 'react-redux'
 import { RecoilRoot } from "recoil";
-import store from "./store";
+import store from "./redux-store/store";
 
 ReactDOM.render(
   <React.StrictMode>

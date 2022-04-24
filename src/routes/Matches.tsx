@@ -1,12 +1,11 @@
 import { getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Filter from "../components/Matches/Filter";
-import { IMatchProps } from "../components/utills";
+import { IMatchProps } from "../components/utils/utils";
 import { springSplitDB } from "../firebase";
-import { RootState } from "../store";
+import { useAppSelector } from "../redux-store/hook";
 import Preparing from "./Preparing";
 import SpringSplit from "./Seasons/SpringSplit";
 import SummerSplit from "./Seasons/SummerSplit";
@@ -34,7 +33,7 @@ const Season = styled.div`
 function Matches() {
   const [spirngSchedules, setSpringSchedules] = useState<IMatchProps[]>();
   const [summerSchedules, setSummerSchedules] = useState<IMatchProps[]>();
-  const filter = useSelector((state: RootState) => state.filter);
+  const filter = useAppSelector(state=> state.filter)
 
   const filteringTeams = (schedules: IMatchProps[]) =>
     filter.includes("all")

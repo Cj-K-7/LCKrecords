@@ -86,3 +86,7 @@ Matches 내에 local route 구현 및 refactoring
  폴더 정리, 추후 추가 작업
 
  오는 시즌 준비중 페이지 및 라우팅 정리 완료.
+
+# 2022/4/24
+
+리덕스 툴킷 refactoring.

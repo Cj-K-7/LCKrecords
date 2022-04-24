@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Operation from "../components/Core/Operation";
+import Operation from "../components/admin/Operation";
 
 export interface IdataProps {
   name: string;
