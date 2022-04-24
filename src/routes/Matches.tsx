@@ -66,7 +66,7 @@ function Matches() {
     <Container>
       <Filter />
       <Series>
-      <Link to="/matches/spring">
+      <Link to="/matches/spring/playoff">
         <Season>Spring</Season>
       </Link>
       <Link to="/matches/summer">
@@ -78,7 +78,7 @@ function Matches() {
           <Route path="/spring" element={<Preparing />} />
         ) : (
           <Route
-            path="/spring"
+            path="/spring/*"
             element={
               <SpringSplit
                 seasonSplitMatchs={filteringTeams(spirngSchedules)}
@@ -88,7 +88,7 @@ function Matches() {
           />
         )}
         {summerSchedules === undefined ? (
-          <Route path="/summer" element={<Preparing />} />
+          <Route path="/summer/*" element={<Preparing />} />
         ) : (
           <Route
             path="/summer"

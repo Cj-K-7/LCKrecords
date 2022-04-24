@@ -79,6 +79,9 @@ const Sign = styled.h1`
 function Header() {
   const [isClicked, setIsClicked] = useState(false);
   const navigation = useNavigate();
+  
+  //season 에 따라 Routing 위치 바뀌게끔 설계 추후 추가 필요.
+
   return (
     <>
       <HeaderBox>

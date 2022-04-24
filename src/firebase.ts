@@ -16,6 +16,7 @@ const app = initializeApp(firebaseConfig);
 
 export const database = getFirestore(app);
 
+//파이어 베이스에서 auth 인스턴스를 불러옴.
 export const auth = getAuth();
 
 export const springSplitDB = doc(database, "DB", "SpringSplit");

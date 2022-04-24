@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { toggle } from "../redux-store/slices/loginSlice";
+import { authStateToggle } from "../redux-store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -84,7 +84,7 @@ function Auth() {
   const [isNew, setIsNew] = useState(false);
   const navigation = useNavigate();
   const dispatch = useDispatch();
-  const noLogIn = () => {dispatch(toggle(true)); navigation('/')}
+  const noLogIn = () => {dispatch(authStateToggle(true)); navigation('/')}
   const {
     register,
     handleSubmit,

@@ -1,10 +1,12 @@
 import { useState } from "react";
-import styled from "styled-components"
+import { Link, Route, Routes } from "react-router-dom";
+import styled from "styled-components";
 import Loader from "../../components/Layouts/Loader";
 import Last from "../../components/Matches/Last";
 import PlayOff from "../../components/Matches/PlayOff";
 import Upcoming from "../../components/Matches/Upcoming";
 import { ISplitProps } from "../../components/utils/utils";
+import Preparing from "../Preparing";
 
 const Tab = styled.div`
   margin: 10px;
@@ -13,13 +15,20 @@ const Tab = styled.div`
   text-decoration: underline;
   text-align: center;
   &:hover {
-    color : ${props=> props.theme.textHover};
+    color: ${(props) => props.theme.textHover};
   }
 `;
 
-function SpringSplit({seasonSplitMatchs, playOffMatches}: ISplitProps) {
-    const [toggle, setToggle] = useState(false);
+const Submenu = styled.div`
+  margin-top: 20px;
+  margin-left: 30px;
+  & a {
+    padding: 20px;
+  }
+`;
 
+function SpringSplit({ seasonSplitMatchs, playOffMatches }: ISplitProps) {
+  const [toggle, setToggle] = useState(true);
   const upcomings = seasonSplitMatchs
     ?.sort((pre, next) => {
       if (new Date(pre.date) > new Date(next.date)) return 1;
@@ -36,10 +45,25 @@ function SpringSplit({seasonSplitMatchs, playOffMatches}: ISplitProps) {
 
   return (
     <>
-        {playOffMatches.length > 0 ?
-            <PlayOff poTeams={playOffMatches}/> : null
+      <Submenu>
+        <Link to="/matches/spring/league">League</Link>
+        <Link to="/matches/spring/playoff">Play Off</Link>
+      </Submenu>
+      <Routes>
+        <Route
+          path="/playoff"
+          element={
+            playOffMatches.length > 0 ? (
+              <PlayOff poTeams={playOffMatches} />
+            ) : (
+              <Preparing />
+            )
           }
-            {seasonSplitMatchs ? (
+        />
+        <Route
+          path="/league"
+          element={
+            seasonSplitMatchs ? (
               <>
                 <Upcoming upcoming={upcomings} />
                 <Tab onClick={() => setToggle((pre) => !pre)}>
@@ -49,9 +73,12 @@ function SpringSplit({seasonSplitMatchs, playOffMatches}: ISplitProps) {
               </>
             ) : (
               <Loader />
-            )}
+            )
+          }
+        />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default SpringSplit
+export default SpringSplit;

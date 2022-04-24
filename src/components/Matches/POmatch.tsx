@@ -23,7 +23,7 @@ const Schedule = styled.div<{ month: number; date: number }>`
       140deg,
       rgb(45, 119, 204),
       5%,
-      transparent 50%
+      transparent 60%
     );
   }
 `;
@@ -67,7 +67,7 @@ const Team = styled.div<{ round: number }>`
   & h1 {
     ${(props) =>
       props.round === 5
-        ? `width: 140px; text-align: center;
+        ? `margin : 15px 0px; width: 140px; text-align: center;
     font-size: 48px;
 `
         : `text-align: left;

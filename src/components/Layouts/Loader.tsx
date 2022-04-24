@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Position = styled.div`
@@ -7,7 +7,7 @@ const Position = styled.div`
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  h2{
+  h2 {
     font-size: 30px;
   }
 `;
@@ -48,13 +48,19 @@ const Loading = styled.div`
 `;
 
 function Loader() {
-  const [isExeeded, setIsExeeded] = useState(false);
-  setInterval(() => setIsExeeded(true), 7000);
+  const [isExceeded, setIsExceeded] = useState(false);
+
+  useEffect(() => {
+    const timeExceed = setTimeout(() => setIsExceeded(true), 7000);
+    return ()=>clearTimeout(timeExceed);
+  }, []);
+
   return (
     <Position>
-      {isExeeded ? (
+      {isExceeded ? (
         <h2>
-        We are preparing The next Season. <br/><br/> Thank you.
+          We are preparing The next Season. <br />
+          <br /> Thank you.
         </h2>
       ) : (
         <Loading>
