@@ -18,11 +18,15 @@ const Container = styled.div`
 `;
 
 function Operation() {
+  // user 로그인 상태에 따라 조작 가능 여부 추가가 가능하면 좋을듯.
+
   const [leftMatches, setLeftMatches] = useState<DocumentData[]>();
-  const onWeekChange = (event : React.ChangeEvent<HTMLInputElement>) =>{
-    const {currentTarget : {value}} = event;
+  const onWeekChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
     console.log(value);
-  }
+  };
   const getData = async () => {
     const que = doc(database, "DB", "SpringSplit");
     const document = await getDoc(que);
@@ -31,7 +35,9 @@ function Operation() {
       const matches: IMatchProps[] = document.data().sample;
       setLeftMatches(
         matches
-          .sort((pre, next) => (new Date(pre.date) > new Date(next.date) ? 1 : -1))
+          .sort((pre, next) =>
+            new Date(pre.date) > new Date(next.date) ? 1 : -1
+          )
           .filter((match) => !match.isDone)
       );
     }
@@ -50,8 +56,8 @@ function Operation() {
       <h1>OPERATION PANEL</h1>
       <br />
       <label>
-      Play Off period : 
-      <input onChange={onWeekChange} type="week" name="playOffSeason"></input>
+        Play Off period :
+        <input onChange={onWeekChange} type="week" name="playOffSeason"></input>
       </label>
       {/* <button onClick={() => setBase()}>Set Base</button> */}
       {leftMatches ? (

@@ -5,7 +5,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 2.5s ease-in-out;
   transform-style: preserve-3d;
   animation: rotating 6s infinite;
   @keyframes rotating {
