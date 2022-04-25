@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
+  transform-origin: center;
   animation: rotating 6s infinite;
   @keyframes rotating {
       0%{
@@ -19,7 +20,7 @@ const Container = styled.div`
 const Box = styled.div`
   transform-style: preserve-3d;
   position: relative;
-  transform: rotateY(20deg) rotateX(28deg);
+  transform: rotateY(20deg) rotateZ(28deg);
   &::before{
       content: '';
       position: absolute;

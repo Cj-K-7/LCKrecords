@@ -55,10 +55,16 @@ function Operation() {
     <Container>
       <h1>OPERATION PANEL</h1>
       <br />
+
+    <form>
+
       <label>
-        Play Off period :
-        <input onChange={onWeekChange} type="week" name="playOffSeason"></input>
+        Play Off start :
+        <input onChange={onWeekChange} type="date" name="playOffSeason"></input>
+        Play Off end :
+        <input onChange={onWeekChange} type="date" name="playOffSeason"></input>
       </label>
+    </form>
       {/* <button onClick={() => setBase()}>Set Base</button> */}
       {leftMatches ? (
         leftMatches.length === 0 ? (
