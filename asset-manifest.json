@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/LCKrecords/static/js/main.df0f345d.js",
+    "main.js": "/LCKrecords/static/js/main.1218c531.js",
     "static/media/TBD.png": "/LCKrecords/static/media/TBD.ec7ba0c7dd916e5e33bc.png",
     "static/media/TBD_reverse.png": "/LCKrecords/static/media/TBD_reverse.ec7ba0c7dd916e5e33bc.png",
     "static/media/BRO_reverse.png": "/LCKrecords/static/media/BRO_reverse.df993f3ab926046693fc.png",
@@ -11,9 +11,9 @@
     "static/media/HLE_reverse.png": "/LCKrecords/static/media/HLE_reverse.a06930fb75710c403a47.png",
     "static/media/T1_reverse.png": "/LCKrecords/static/media/T1_reverse.7eaa1e29460174fcc763.png",
     "index.html": "/LCKrecords/index.html",
-    "main.df0f345d.js.map": "/LCKrecords/static/js/main.df0f345d.js.map"
+    "main.1218c531.js.map": "/LCKrecords/static/js/main.1218c531.js.map"
   },
   "entrypoints": [
-    "static/js/main.df0f345d.js"
+    "static/js/main.1218c531.js"
   ]
 }
